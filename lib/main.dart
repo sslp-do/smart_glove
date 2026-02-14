@@ -286,7 +286,7 @@ class StatsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [//okay
+      children: [//okay2
         _buildStatCard("Current Streak 🔥", "5 Days", Colors.orange, context),
         const SizedBox(width: 20),
         _buildStatCard("Total Sessions ✅", "12 Sessions", Colors.blue, context),
