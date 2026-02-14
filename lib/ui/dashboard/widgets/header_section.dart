@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
+import 'battery_status.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
@@ -26,7 +27,8 @@ class HeaderSection extends StatelessWidget {
           ],
         ),
         // Glove Connection Status Indicator
-        Container(
+        GloveBatteryStatus(batteryLevel: 75),
+        /*Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -46,9 +48,11 @@ class HeaderSection extends StatelessWidget {
               ),
               SizedBox(width: 8),
               Icon(Icons.bluetooth, color: Colors.green),
+              Divider(),
+
             ],
           ),
-        ),
+        ),*/
       ],
     );
   }
