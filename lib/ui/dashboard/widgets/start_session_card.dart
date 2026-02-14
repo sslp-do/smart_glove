@@ -38,24 +38,26 @@ class StartSessionCard extends StatelessWidget {
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Text(
+                  child:  Text(
                     "Today's Session",
-                    style: TextStyle(color: Colors.white),
+                   style: theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
+                 Text(
                   "Exercise: Full Hand Grip",
-                  style: TextStyle(
+                  style:
+                   theme.textTheme.displayMedium!.copyWith(color: Colors.white)
+                   /* TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                  color: theme.textTheme.bodyMedium?.color,
+                  )*/,
                 ),
                 const SizedBox(height: 5),
-                const Text(
+                 Text(
                   "Duration: 15 mins • Reps: 20",
-                  style: TextStyle(color: Colors.white70),
+                  style: theme.textTheme.titleLarge!.copyWith(color: Colors.white),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
@@ -63,10 +65,9 @@ class StartSessionCard extends StatelessWidget {
                     // Navigate to Live Session Screen
                   },
                   icon: const Icon(Icons.play_arrow),
-                  label: const Text("Start Session Now"),
+                  label:  Text("Start Session Now", style: theme.textTheme.titleLarge!.copyWith(color: theme.primaryColor),),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: theme.primaryColor,
+                    backgroundColor: theme.cardColor,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
                       vertical: 12,
@@ -79,11 +80,11 @@ class StartSessionCard extends StatelessWidget {
               ],
             ),
           ),
-          // Illustration Icon (Can be replaced with an asset image)
+
           Icon(
             Icons.sports_gymnastics,
             size: 120,
-            color: Colors.white.withOpacity(0.3),
+            color: theme.cardColor.withOpacity(0.3),
           ),
         ],
       ),

@@ -7,7 +7,7 @@ class StatsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        _buildStatCard("Current Streak 🔥", "5 Days", Colors.orange, context),
+        _buildStatCard("Current Streak 🔥", "8 Days", Colors.orange, context),
         const SizedBox(width: 20),
         _buildStatCard("Total Sessions ✅", "12 Sessions", Colors.blue, context),
         const SizedBox(width: 20),
@@ -16,7 +16,12 @@ class StatsGrid extends StatelessWidget {
     );
   }
 
-  Widget _buildStatCard(String title, String value, Color color, BuildContext context) {
+  Widget _buildStatCard(
+    String title,
+    String value,
+    Color color,
+    BuildContext context,
+  ) {
     final theme = Theme.of(context);
 
     return Expanded(
@@ -24,10 +29,13 @@ class StatsGrid extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: theme.cardTheme.color,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
-              BoxShadow(color: theme.colorScheme.secondary.withOpacity(0.1), blurRadius: 10),
+              BoxShadow(
+                color: theme.colorScheme.secondary.withOpacity(0.1),
+                blurRadius: 10,
+              ),
             ],
           ),
           child: Column(
@@ -48,10 +56,7 @@ class StatsGrid extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 15),
-              Text(
-                value,
-                style: theme.textTheme.titleLarge,
-              ),
+              Text(value, style: theme.textTheme.titleLarge),
             ],
           ),
         ),

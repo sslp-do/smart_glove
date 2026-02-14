@@ -12,7 +12,7 @@ class ProgressChartSection extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       height: 350,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.cardTheme.color,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 10),

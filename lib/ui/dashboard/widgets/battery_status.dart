@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 
 class GloveBatteryStatus extends StatelessWidget {
-  final int batteryLevel; // e.g., 75
+  final int batteryLevel;
 
   const GloveBatteryStatus({super.key, required this.batteryLevel});
 
   @override
   Widget build(BuildContext context) {
-
+final theme = Theme.of(context);
     Color statusColor = batteryLevel > 20 ? AppColors.success : AppColors.error;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.cardTheme.color,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.grey.shade300),
       ),
