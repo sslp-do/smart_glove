@@ -26,7 +26,7 @@ void main() async{
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
-      home: const LiveSessionScreen(),
+      home: const PatientDashboard(),
     ),
   );
 }
