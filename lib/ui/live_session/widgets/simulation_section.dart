@@ -90,7 +90,7 @@ Widget _buildSimulation(BuildContext context) {
     const ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(30)),
       child: HandVisualizer(
-        sensorValue: 0.9,
+        sensorValue: 0.5,
         isTargetFist: true,
       ),
     ),

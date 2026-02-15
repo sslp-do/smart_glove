@@ -21,7 +21,7 @@ class HandVisualizer extends StatelessWidget {
 
     Color activeColor = isMatched
         ? Colors.green
-        : Theme.of(context).primaryColor;
+        : Theme.of(context).secondaryHeaderColor;
 
     return Stack(
       alignment: Alignment.center,
@@ -54,6 +54,11 @@ class HandVisualizer extends StatelessWidget {
             scale: 0.95,
           ),
         ),
+
+       // Check mark
+       Positioned(
+           right: 20,top: 20,
+           child: Icon(Icons.check_circle,color: activeColor,)),
 
        // Feedback overlay
         if (isMatched)
