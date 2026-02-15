@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_glove/ui/live_session/widgets/hand_visualizer.dart';
 
 class simulationSection extends StatelessWidget {
   const simulationSection({super.key});
@@ -76,27 +77,22 @@ Widget _buildSimulation(BuildContext context) {
     decoration: BoxDecoration(
       color: cardColor,
       borderRadius: BorderRadius.circular(30),
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [?cardColor, Theme.of(context).primaryColor.withOpacity(0.05)],
+      ),
       boxShadow: [
         BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 20),
       ],
     ),
-    child: Stack(
-      alignment: Alignment.center,
-      children: [
-        Icon(Icons.grid_4x4, size: 200, color: Colors.grey.withOpacity(0.1)),
-
-        // Hand simulation
-        Icon(Icons.pan_tool, size: 180, color: primaryColor),
-
-        // Description text
-        Positioned(
-          bottom: 20,
-          child: Text(
-            "Visual Simulation Area",
-            style: TextStyle(color: theme.textTheme.bodyMedium?.color),
-          ),
-        ),
-      ],
+    child:
+    const ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(30)),
+      child: HandVisualizer(
+        sensorValue: 0.9,
+        isTargetFist: true,
+      ),
     ),
   );
 }
