@@ -54,7 +54,7 @@ Widget _buildIndicators(BuildContext context) {
       // strength indicator
       _strengthIndicator(context,0.75),
 
-      SizedBox(width: 20),
+      SizedBox(width: 10),
 
       // Timer indicator
       _timerIndicator(context,0.7),

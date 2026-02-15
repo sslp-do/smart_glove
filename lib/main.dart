@@ -10,7 +10,7 @@ void main() async{
 
   WindowOptions windowOptions = const WindowOptions(
     size: Size(1200, 800),
-    minimumSize: Size(900, 600),
+    minimumSize: Size(950, 600),
     center: true,
     title: "Rehab Glove",
   );
