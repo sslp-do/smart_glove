@@ -37,6 +37,7 @@ dependencies:
   fl_chart: ^1.1.1
   window_manager: ^0.5.1
   percent_indicator: ^4.2.5
+  audioplayers: ^6.5.1
 
 
 dev_dependencies:
@@ -73,6 +74,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/sounds/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

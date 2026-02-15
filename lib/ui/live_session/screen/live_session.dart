@@ -1,9 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:smart_glove/ui/live_session/widgets/control_section.dart';
 import 'package:smart_glove/ui/live_session/widgets/simulation_section.dart';
+import 'package:smart_glove/utils/sound_manager.dart';
 
-class LiveSessionScreen extends StatelessWidget {
+class LiveSessionScreen extends StatefulWidget {
   const LiveSessionScreen({super.key});
+
+  @override
+  State<LiveSessionScreen> createState() => _LiveSessionScreenState();
+}
+
+class _LiveSessionScreenState extends State<LiveSessionScreen> {
+
+  double sensorValue = 0.0;
+  bool isTargetReached = false;
+
+  bool _hasPlayedSuccessSound = false; // True if the success sound has been played
+
+
+  void simulateGloveData() {
+   // Bluetooth code here
+    setState(() {
+      sensorValue = 0.85;
+
+      if (sensorValue > 0.8) {
+        if (!_hasPlayedSuccessSound) {
+
+          SoundManager.playSuccess();
+
+          _hasPlayedSuccessSound = true;
+
+          // repetitionsCount++;
+        }
+      } else {
+
+        _hasPlayedSuccessSound = false;
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +56,13 @@ class LiveSessionScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {},
+            icon: const Icon(Icons.check_circle),
+            onPressed: () { simulateGloveData();},
+          ), IconButton(
+            icon: const Icon(Icons.share_arrival_time),
+            onPressed: () { SoundManager.playSessionComplete();},
           ),
+
           _buildSensorState(context),
         ],
       ),
