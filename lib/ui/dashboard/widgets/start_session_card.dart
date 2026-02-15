@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_glove/ui/live_session/screen/live_session.dart';
 
 class StartSessionCard extends StatelessWidget {
   const StartSessionCard({super.key});
@@ -62,7 +63,10 @@ class StartSessionCard extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Navigate to Live Session Screen
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LiveSessionScreen()),
+                  );
                   },
                   icon: const Icon(Icons.play_arrow),
                   label:  Text("Start Session Now", style: theme.textTheme.titleLarge!.copyWith(color: theme.primaryColor),),
