@@ -38,6 +38,7 @@ dependencies:
   window_manager: ^0.5.1
   percent_indicator: ^4.2.5
   audioplayers: ^6.5.1
+  confetti: ^0.8.0
 
 
 dev_dependencies:

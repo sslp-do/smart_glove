@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_glove/ui/live_session/widgets/control_section.dart';
 import 'package:smart_glove/ui/live_session/widgets/simulation_section.dart';
@@ -17,9 +20,10 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
 
   bool _hasPlayedSuccessSound = false; // True if the success sound has been played
 
+  late ConfettiController _confettiController;
 
   void simulateGloveData() {
-   // Bluetooth code here
+    // Bluetooth code here
     setState(() {
       sensorValue = 0.85;
 
@@ -38,6 +42,43 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
       }
     });
   }
+
+  void finishSession() {
+    SoundManager.playSessionComplete();
+
+    _confettiController.play();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Great Job! 🎉"),
+        content: const Text("Session completed successfully. See you tomorrow!"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+           /*   Navigator.pop(context);*/
+            },
+            child: const Text("Done"),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    super.dispose();
+  }
+
+
 
 
   @override
@@ -60,18 +101,41 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
             onPressed: () { simulateGloveData();},
           ), IconButton(
             icon: const Icon(Icons.share_arrival_time),
-            onPressed: () { SoundManager.playSessionComplete();},
+            onPressed: () { SoundManager.playSessionComplete();
+              finishSession();
+              },
           ),
 
           _buildSensorState(context),
         ],
       ),
-      body: Row(
+      body: Stack(
         children: [
-          // left side : simulation (60%)
-          simulationSection(),
-          // right side : control (40%)
-          controlSection(),
+          Row(
+            children: [
+              // left side : simulation (60%)
+              simulationSection(),
+              // right side : control (40%)
+              controlSection(),
+            ],
+          ),
+
+          Align(
+            alignment: Alignment.topCenter,
+            child: ConfettiWidget(
+              confettiController: _confettiController,
+              blastDirectionality: BlastDirectionality.explosive,
+              shouldLoop: false,
+              colors: const [
+                Colors.green,
+                Colors.blue,
+                Colors.pink,
+                Colors.orange,
+                Colors.purple
+              ],
+              createParticlePath: drawStar,
+            ),
+          ),
         ],
       ),
     );
@@ -103,4 +167,26 @@ Widget _buildSensorState(BuildContext context){
     ),
   );
 }
+
+Path drawStar(Size size) {
+  double degToRad(double deg) => deg * (pi / 180.0);
+  const numberOfPoints = 5;
+  final halfWidth = size.width / 2;
+  final externalRadius = halfWidth;
+  final internalRadius = halfWidth / 2.5;
+  final degreesPerStep = degToRad(360 / numberOfPoints);
+  final halfDegreesPerStep = degreesPerStep / 2;
+  final path = Path();
+  final fullAngle = degToRad(360);
+  path.moveTo(size.width, halfWidth);
+
+  for (double step = 0; step < fullAngle; step += degreesPerStep) {
+    path.lineTo(halfWidth + externalRadius * cos(step), halfWidth + externalRadius * sin(step));
+    path.lineTo(halfWidth + internalRadius * cos(step + halfDegreesPerStep), halfWidth + internalRadius * sin(step + halfDegreesPerStep));
+  }
+  path.close();
+  return path;
+}
+
+
 
