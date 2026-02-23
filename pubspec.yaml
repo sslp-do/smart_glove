@@ -39,6 +39,7 @@ dependencies:
   percent_indicator: ^4.2.5
   audioplayers: ^6.5.1
   confetti: ^0.8.0
+  flutter_animate: ^4.5.2
 
 
 dev_dependencies:

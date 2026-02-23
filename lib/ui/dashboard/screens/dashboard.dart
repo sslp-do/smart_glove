@@ -26,7 +26,7 @@ class PatientDashboard extends StatelessWidget {
             children: [
               // 1. Sidebar Navigation
               if (isSmallScreen)
-              const SideMenu(isCollapsed: true,)
+                const SideMenu(isCollapsed: true,)
               else
                 const SideMenu(isCollapsed: false,),
 
