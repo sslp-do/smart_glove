@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_glove/ui/admin_dashboard/screen/admin_dashboard.dart';
 import 'package:smart_glove/ui/dashboard/screens/dashboard.dart';
 import 'package:smart_glove/ui/live_session/screen/live_session.dart';
+import 'package:smart_glove/ui/login/screen/login.dart';
 import 'package:smart_glove/ui/splash_screen/screen/splash_screen.dart';
 import 'package:window_manager/window_manager.dart';
 import 'core/theme/app_colors.dart';
@@ -27,7 +29,7 @@ void main() async{
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
-      home: const SplashScreen(),
+      home: const TherapistDashboard(),
     ),
   );
 }

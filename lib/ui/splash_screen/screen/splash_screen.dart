@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:smart_glove/models/assets.dart';
+import 'package:smart_glove/ui/login/screen/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,6 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
+     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
     });
   }
 
@@ -40,13 +42,13 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Image.asset(AppAssets.background, fit: BoxFit.cover),
           ),
 
-          Opacity(
+         /* Opacity(
             opacity: 0.2,
             child: Image.asset(AppAssets.gloveHand,fit: BoxFit.cover)
                 .animate()
                 .fade(duration: 900.ms)
-                .scale(delay: 400.ms),
-          ),
+             //   .scale(delay: 400.ms),
+          ),*/
 
           Center(
             child: Column(
@@ -57,8 +59,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 /*  const Icon(Icons.back_hand_rounded, size: 100, color: Colors.cyanAccent)
                     .animate()
                     .fade(duration: 600.ms)
-                    .scale(delay: 200.ms),
-             //   const SizedBox(height: 20),*/
+                    .scale(delay: 200.ms),*/
+                     Image.asset(AppAssets.gloveHand,scale: 5,),
+               const SizedBox(height: 20),
 
 
                 Text(
