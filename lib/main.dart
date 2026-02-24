@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/ui/admin_dashboard/screen/admin_dashboard.dart';
-import 'package:smart_glove/ui/dashboard/screens/dashboard.dart';
+import 'package:smart_glove/ui/therapist_dashboard/screen/therapist_dashboard.dart';
+import 'package:smart_glove/ui/patient_dashboard/screens/patient_dashboard.dart';
 import 'package:smart_glove/ui/live_session/screen/live_session.dart';
 import 'package:smart_glove/ui/login/screen/login.dart';
 import 'package:smart_glove/ui/splash_screen/screen/splash_screen.dart';
