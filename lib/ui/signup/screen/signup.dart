@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/models/assets.dart';
+import 'package:smart_glove/core/models/assets.dart';
+import 'package:smart_glove/ui/login/screen/login.dart';
 
 class PatientSignUpScreen extends StatefulWidget {
   const PatientSignUpScreen({super.key});
@@ -131,7 +132,7 @@ class _PatientSignUpScreenState extends State<PatientSignUpScreen> {
 
                       ElevatedButton(
                         onPressed: () {
-
+Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen(),));
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 20),

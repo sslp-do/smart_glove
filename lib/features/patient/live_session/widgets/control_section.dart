@@ -9,7 +9,6 @@ class controlSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cardColor = theme.cardTheme.color;
-    final textColor = theme.textTheme.titleLarge?.color;
 
     return Expanded(
       flex: 4,

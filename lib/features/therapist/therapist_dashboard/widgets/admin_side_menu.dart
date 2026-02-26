@@ -2,6 +2,7 @@
 // 1. (Admin Side Menu)
 // =========================================================
 import 'package:flutter/material.dart';
+import 'package:smart_glove/ui/login/screen/login.dart';
 
 class AdminSideMenu extends StatelessWidget {
   const AdminSideMenu({super.key});
@@ -41,7 +42,13 @@ class AdminSideMenu extends StatelessWidget {
           ),
 
           const Spacer(),
-          _buildMenuItem(context, Icons.logout, "Logout", false, isRed: true),
+          _buildMenuItem(
+            context,
+            Icons.logout,
+            "Logout",
+            false,
+            isLogout: true,
+          ),
           const SizedBox(height: 20),
         ],
       ),
@@ -49,15 +56,16 @@ class AdminSideMenu extends StatelessWidget {
   }
 
   Widget _buildMenuItem(
-      BuildContext context,
-      IconData icon,
-      String title,
-      bool isActive, {
-        bool isRed = false,
-      }) {
+    BuildContext context,
+    IconData icon,
+    String title,
+
+    bool isActive, {
+    bool isLogout = false,
+  }) {
     final theme = Theme.of(context);
     final primaryColor = theme.primaryColor;
-    final textColor = isRed
+    final textColor = isLogout
         ? Colors.redAccent
         : (isActive ? primaryColor : theme.textTheme.bodyMedium?.color);
 
@@ -65,9 +73,9 @@ class AdminSideMenu extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: isActive
           ? BoxDecoration(
-        color: primaryColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(10),
-      )
+              color: primaryColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(10),
+            )
           : null,
       child: ListTile(
         leading: Icon(icon, color: textColor),
@@ -78,7 +86,16 @@ class AdminSideMenu extends StatelessWidget {
             fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
           ),
         ),
-        onTap: () {},
+        onTap:() {
+          if (isLogout) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginScreen(),
+              ),
+            );
+          }
+        } ,
       ),
     );
   }

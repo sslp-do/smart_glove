@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/ui/live_session/screen/live_session.dart';
+import 'package:smart_glove/features/patient/live_session/screen/live_session.dart';
 
 class StartSessionCard extends StatelessWidget {
   const StartSessionCard({super.key});

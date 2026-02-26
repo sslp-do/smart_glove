@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:smart_glove/models/assets.dart';
+import 'package:smart_glove/core/models/assets.dart';
 import 'package:smart_glove/ui/login/screen/login.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
-     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
     });
   }
 

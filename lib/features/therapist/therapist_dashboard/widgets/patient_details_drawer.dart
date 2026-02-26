@@ -1,6 +1,3 @@
-// =========================================================
-// 7. اللوحة الجانبية لتفاصيل المريض (Patient Slide-out Panel)
-// =========================================================
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +9,12 @@ class PatientDetailsDrawer extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Drawer(
-      width: 450, // عرض عريض يناسب سطح المكتب
+      width: 450,
       backgroundColor: theme.scaffoldBackgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // ---- رأس اللوحة (Header) ----
+          // Header
           Container(
             padding: const EdgeInsets.all(32.0),
             color: theme.cardTheme.color,
@@ -29,7 +26,7 @@ class PatientDetailsDrawer extends StatelessWidget {
                     const Text("Patient Profile", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
                     IconButton(
                       icon: const Icon(Icons.close),
-                      onPressed: () => Navigator.pop(context), // إغلاق اللوحة
+                      onPressed: () => Navigator.pop(context),
                     )
                   ],
                 ),
@@ -41,7 +38,7 @@ class PatientDetailsDrawer extends StatelessWidget {
                 Text("Affected Hand: Left • Age: 28", style: TextStyle(color: Colors.grey[600])),
 
                 const SizedBox(height: 20),
-                // أزرار الإجراءات السريعة
+
                 Row(
                   children: [
                     Expanded(
@@ -67,14 +64,14 @@ class PatientDetailsDrawer extends StatelessWidget {
             ),
           ),
 
-          // ---- محتوى اللوحة (Scrollable) ----
+          // Content
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(32.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 1. الرسم البياني لتقدم زاوية الحركة
+                  // 1. Chart
                   Text("Range of Motion (ROM) Progress", style: theme.textTheme.titleLarge),
                   const SizedBox(height: 20),
                   Container(
@@ -111,12 +108,12 @@ class PatientDetailsDrawer extends StatelessWidget {
 
                   const SizedBox(height: 40),
 
-                  // 2. خطة العلاج الحالية المخصصة للمريض
-                  Text("Current Protocol", style: theme.textTheme.titleLarge),
+                  // 2. Current Plan
+                  Text("Current Plan", style: theme.textTheme.titleLarge),
                   const SizedBox(height: 15),
-                  _buildProtocolItem(context, "Fist Grip", "3 sets of 15 reps", Icons.back_hand),
-                  _buildProtocolItem(context, "Finger Extension", "2 sets of 10 reps", Icons.pan_tool),
-                  _buildProtocolItem(context, "Wrist Rotation", "5 mins duration", Icons.rotate_right),
+                  _buildPlanItem(context, "Fist Grip", "3 sets of 15 reps", Icons.back_hand),
+                  _buildPlanItem(context, "Finger Extension", "2 sets of 10 reps", Icons.pan_tool),
+                  _buildPlanItem(context, "Wrist Rotation", "5 mins duration", Icons.rotate_right),
                 ],
               ),
             ),
@@ -127,7 +124,7 @@ class PatientDetailsDrawer extends StatelessWidget {
   }
 
   // ويدجت مساعدة لعرض التمارين
-  Widget _buildProtocolItem(BuildContext context, String title, String desc, IconData icon) {
+  Widget _buildPlanItem(BuildContext context, String title, String desc, IconData icon) {
     final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.only(bottom: 12),

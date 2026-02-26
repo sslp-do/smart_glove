@@ -2,9 +2,10 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_glove/ui/live_session/widgets/control_section.dart';
-import 'package:smart_glove/ui/live_session/widgets/simulation_section.dart';
-import 'package:smart_glove/utils/sound_manager.dart';
+import 'package:smart_glove/core/utils/sound_manager.dart';
+import 'package:smart_glove/features/patient/live_session/widgets/control_section.dart';
+import 'package:smart_glove/features/patient/live_session/widgets/simulation_section.dart';
+
 
 class LiveSessionScreen extends StatefulWidget {
   const LiveSessionScreen({super.key});

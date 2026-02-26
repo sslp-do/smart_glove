@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:smart_glove/core/theme/app_colors.dart';
-
 import '../widgets/badge_section.dart';
 import '../widgets/header_section.dart';
 import '../widgets/progress_chart_section.dart';
-import '../widgets/side_menu.dart';
+import '../widgets/patient_side_menu.dart';
 import '../widgets/start_session_card.dart';
 import '../widgets/statistics_grid.dart';
 
@@ -26,9 +23,9 @@ class PatientDashboard extends StatelessWidget {
             children: [
               // 1. Sidebar Navigation
               if (isSmallScreen)
-                const SideMenu(isCollapsed: true,)
+                const PatientSideMenu(isCollapsed: true,)
               else
-                const SideMenu(isCollapsed: false,),
+                const PatientSideMenu(isCollapsed: false,),
 
               // 2. Main Content Area
               Expanded(

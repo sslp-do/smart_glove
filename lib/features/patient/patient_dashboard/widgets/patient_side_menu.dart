@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/core/theme/app_colors.dart';
+import 'package:smart_glove/ui/login/screen/login.dart';
 
-class SideMenu extends StatelessWidget {
+class PatientSideMenu extends StatelessWidget {
   final bool isCollapsed;
 
-  const SideMenu({super.key, required this.isCollapsed});
+  const PatientSideMenu({super.key, required this.isCollapsed});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,13 @@ class SideMenu extends StatelessWidget {
           _buildMenuItem(Icons.settings, "Settings", false, context),
 
           const Spacer(),
-          _buildMenuItem(Icons.logout, "Logout", false, context, isRed: true),
+          _buildMenuItem(
+            Icons.logout,
+            "Logout",
+            false,
+            context,
+            isLogout: true,
+          ),
           const SizedBox(height: 20),
         ],
       ),
@@ -49,11 +55,12 @@ class SideMenu extends StatelessWidget {
     IconData icon,
     String title,
     bool isActive,
+
     BuildContext context, {
-    bool isRed = false,
+    bool isLogout = false,
   }) {
     final theme = Theme.of(context);
-    final color = isRed
+    final color = isLogout
         ? theme.colorScheme.error
         : (isActive ? theme.primaryColor : theme.textTheme.bodyMedium!.color);
 
@@ -67,14 +74,25 @@ class SideMenu extends StatelessWidget {
           : null,
       child: ListTile(
         leading: Icon(icon, color: color),
-        title: isCollapsed? null: Text(
-          title,
-          style: TextStyle(
-            color: color,
-            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-          ),
-        ),
-        onTap: () {}, // Add navigation logic here
+        title: isCollapsed
+            ? null
+            : Text(
+                title,
+                style: TextStyle(
+                  color: color,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+        onTap: () {
+          if (isLogout) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginScreen(),
+              ),
+            );
+          }
+        },
       ),
     );
   }

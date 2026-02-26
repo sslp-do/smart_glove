@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/core/theme/app_colors.dart';
+import 'package:smart_glove/core/models/badge_item.dart';
 
-import '../../../models/badge_item.dart';
 
 class BadgesSection extends StatelessWidget {
   const BadgesSection({super.key});

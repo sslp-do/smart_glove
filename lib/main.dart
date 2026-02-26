@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/ui/therapist_dashboard/screen/therapist_dashboard.dart';
-import 'package:smart_glove/ui/patient_dashboard/screens/patient_dashboard.dart';
-import 'package:smart_glove/ui/live_session/screen/live_session.dart';
-import 'package:smart_glove/ui/login/screen/login.dart';
-import 'package:smart_glove/ui/splash_screen/screen/splash_screen.dart';
+import 'package:smart_glove/features/therapist/therapist_dashboard/screen/therapist_dashboard.dart';
+import 'package:smart_glove/features/therapist/therapist_feedback/screen/therapist_feedback.dart';
 import 'package:window_manager/window_manager.dart';
 import 'core/theme/app_colors.dart';
 
@@ -28,7 +25,7 @@ void main() async{
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       home: const TherapistDashboard(),
     ),
   );

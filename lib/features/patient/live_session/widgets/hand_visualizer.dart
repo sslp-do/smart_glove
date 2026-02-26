@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/models/assets.dart';
+import 'package:smart_glove/core/models/assets.dart';
 
 class HandVisualizer extends StatelessWidget {
   final double sensorValue;

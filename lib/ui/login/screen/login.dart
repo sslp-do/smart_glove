@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/models/assets.dart';
+import 'package:smart_glove/core/models/assets.dart';
+import 'package:smart_glove/features/patient/patient_dashboard/screens/patient_dashboard.dart';
+import 'package:smart_glove/features/therapist/therapist_dashboard/screen/therapist_dashboard.dart';
+
 import 'package:smart_glove/ui/signup/screen/signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -123,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 20),
 
-                    // ---- حقل كلمة المرور ----
+
                     Text("Password", style: theme.textTheme.titleSmall),
                     const SizedBox(height: 8),
                     TextFormField(
@@ -153,9 +156,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ElevatedButton(
                       onPressed: () {
                         if (isPatientLogin) {
-                          // Navigator.pushReplacement(context, ...PatientDashboard);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PatientDashboard()));
                         } else {
-                          // Navigator.pushReplacement(context, ...TherapistDashboard);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TherapistDashboard()));
                         }
                       },
                       style: ElevatedButton.styleFrom(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/ui/live_session/widgets/hand_visualizer.dart';
+import 'package:smart_glove/features/patient/live_session/widgets/hand_visualizer.dart';
 
 class simulationSection extends StatelessWidget {
   const simulationSection({super.key});
@@ -33,7 +33,7 @@ class simulationSection extends StatelessWidget {
 
 Widget _buildHeader(BuildContext context, String title, String subtitle) {
   final theme = Theme.of(context);
-  final textColor = Theme.of(context).textTheme.titleLarge?.color;
+  final _ = Theme.of(context).textTheme.titleLarge?.color;
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -69,7 +69,6 @@ Widget _buildHeader(BuildContext context, String title, String subtitle) {
 Widget _buildSimulation(BuildContext context) {
   final theme = Theme.of(context);
   final cardColor = theme.cardTheme.color;
-  final primaryColor = theme.primaryColor;
 
   return Container(
     height: 400,

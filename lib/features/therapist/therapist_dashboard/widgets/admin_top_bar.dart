@@ -1,6 +1,3 @@
-// =========================================================
-// 2. (Top Bar)
-// =========================================================
 import 'package:flutter/material.dart';
 
 class AdminTopBar extends StatelessWidget {
