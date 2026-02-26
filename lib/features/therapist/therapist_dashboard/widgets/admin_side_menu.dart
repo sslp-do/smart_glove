@@ -33,6 +33,11 @@ class AdminSideMenu extends StatelessWidget {
             Icons.fitness_center,
             "Exercises Library",
             false,
+          ), _buildMenuItem(
+            context,
+            Icons.feedback_outlined,
+            "Feedbacks",
+            false,
           ),
           _buildMenuItem(
             context,

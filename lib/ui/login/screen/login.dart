@@ -158,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (isPatientLogin) {
                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PatientDashboard()));
                         } else {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TherapistDashboard()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  TherapistDashboard()));
                         }
                       },
                       style: ElevatedButton.styleFrom(
