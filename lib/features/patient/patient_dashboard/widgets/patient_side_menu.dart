@@ -34,7 +34,7 @@ class PatientSideMenu extends StatelessWidget {
           // Menu Items
           _buildMenuItem(Icons.dashboard, "Dashboard", true, context),
           _buildMenuItem(Icons.analytics, "My Reports", false, context),
-          _buildMenuItem(Icons.chat, "Chat with Therapist", false, context),
+        /*  _buildMenuItem(Icons.chat, "Chat with Therapist", false, context),*/
           _buildMenuItem(Icons.settings, "Settings", false, context),
 
           const Spacer(),

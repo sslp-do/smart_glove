@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/features/therapist/ai_reports/screen/ai_reports.dart';
+import 'package:smart_glove/features/therapist/ai_reports/screen/therapist_ai_reports.dart';
 import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/admin_side_menu.dart';
 import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/main_content.dart';
 import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/patient_details_drawer.dart';
@@ -13,7 +13,7 @@ class TherapistDashboard extends StatelessWidget {
     final bgColor = theme.scaffoldBackgroundColor;
     int index = 0;
     if(index==4)
-    return  const AIReportsScreen();
+    return  const TherapistAIReports();
     else return Scaffold(
       backgroundColor: bgColor,
       endDrawer: const PatientDetailsDrawer(),
