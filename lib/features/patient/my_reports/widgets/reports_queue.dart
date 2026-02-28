@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class RepotsQueue extends StatelessWidget {
@@ -131,53 +129,7 @@ class RepotsQueue extends StatelessWidget {
               const SizedBox(height: 12),
 
               // رسالة الطبيب (Doctor's Note)
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey.withOpacity(0.05),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border(
-                    left: BorderSide(color: primaryColor, width: 4),
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 10,
-                          backgroundColor: primaryColor,
-                          child: Icon(
-                            Icons.person,
-                            size: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          "Dr. Notes",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      "\"${report['doctorNote']}\"",
-                      style: const TextStyle(
-                        height: 1.5,
-                        fontSize: 14,
-                        color: Colors.black87,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
             ],
           ),
         );
@@ -185,3 +137,4 @@ class RepotsQueue extends StatelessWidget {
     );
   }
 }
+

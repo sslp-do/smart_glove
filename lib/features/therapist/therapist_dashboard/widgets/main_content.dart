@@ -6,19 +6,19 @@ import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/overv
 import 'package:smart_glove/features/therapist/therapist_feedback/screen/therapist_feedback.dart';
 import 'package:smart_glove/features/therapist/exercises_library/screen/therapist_exersices_library.dart';
 
-class MainContent extends StatefulWidget {
+class TherapistMainContent extends StatefulWidget {
   int index = 0;
 
-  MainContent({super.key, required this.index});
+  TherapistMainContent({super.key, required this.index});
 
   @override
-  State<MainContent> createState() => _MainContentState(index);
+  State<TherapistMainContent> createState() => _TherapistMainContentState(index);
 }
 
-class _MainContentState extends State<MainContent> {
+class _TherapistMainContentState extends State<TherapistMainContent> {
   int index = 0;
 
-  _MainContentState(this.index);
+  _TherapistMainContentState(this.index);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _MainContentState extends State<MainContent> {
           if (index == 1) Expanded(child: const AllPatientsScreen()),
           if (index == 2) Expanded(child: const TherapistExercisesScreen()),
           if (index == 3) Expanded(child: const TherapistFeedbackScreen()),
-          if (index == 5) Expanded(child: const TherapistFeedbackScreen()),
+         // if (index == 5) Expanded(child: const TherapistFeedbackScreen()),
         ],
       ),
     );

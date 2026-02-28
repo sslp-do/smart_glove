@@ -5,16 +5,11 @@ import '../widgets/patient_side_menu.dart';
 class PatientDashboard extends StatelessWidget {
   PatientDashboard({super.key});
 
-  String routName = "overview";
+  String routName = "settings";
   bool isScreenCollapsed = false;
 
   @override
   Widget build(BuildContext context) {
-    if (routName == "overview") {
-      isScreenCollapsed = false;
-    } else {
-      isScreenCollapsed = true;
-    }
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
