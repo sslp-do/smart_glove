@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/core/providers/navigation_provider.dart';
 
 class AdminTopBar extends StatelessWidget {
   const AdminTopBar({super.key});
@@ -12,8 +14,8 @@ class AdminTopBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // شريط البحث
-          SizedBox(
+
+          /*SizedBox(
             width: 300,
             child: TextField(
               decoration: InputDecoration(
@@ -23,9 +25,19 @@ class AdminTopBar extends StatelessWidget {
                 fillColor: theme.scaffoldBackgroundColor,
               ),
             ),
+          ),*/
+          Text(context.watch<NavigationProvider>().currentRoute, style: theme.textTheme.displayMedium),
+          const CircleAvatar(
+            backgroundColor: Colors.cyan,
+            child: Text(
+              "Dr",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-          // ملف الطبيب والإشعارات
-          Row(
+         /* Row(
             children: [
               IconButton(
                 icon: const Badge(
@@ -35,18 +47,9 @@ class AdminTopBar extends StatelessWidget {
                 onPressed: () {},
               ),
               const SizedBox(width: 20),
-              const CircleAvatar(
-                backgroundColor: Colors.cyan,
-                child: Text(
-                  "Dr",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+
             ],
-          ),
+          )*/
         ],
       ),
     );

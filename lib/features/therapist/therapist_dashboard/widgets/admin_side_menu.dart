@@ -2,6 +2,8 @@
 // 1. (Admin Side Menu)
 // =========================================================
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/core/providers/navigation_provider.dart';
 import 'package:smart_glove/ui/login/screen/login.dart';
 
 class AdminSideMenu extends StatelessWidget {
@@ -21,29 +23,29 @@ class AdminSideMenu extends StatelessWidget {
           Icon(Icons.admin_panel_settings, size: 60, color: primaryColor),
           const SizedBox(height: 10),
           const Text(
-            "Dr. Dashboard",
+            "Dr. Ahmad",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 50),
 
-          _buildMenuItem(context, Icons.grid_view, "Overview", true),
-          _buildMenuItem(context, Icons.people_outline, "All Patients", false),
+          _buildMenuItem(context, Icons.grid_view, "Overview", "overview"),
+          _buildMenuItem(context, Icons.people_outline, "All Patients", "all_patients"),
           _buildMenuItem(
             context,
             Icons.fitness_center,
             "Exercises Library",
-            false,
+           "exercises"
           ), _buildMenuItem(
             context,
             Icons.feedback_outlined,
             "Feedbacks",
-            false,
+           "feedback"
           ),
           _buildMenuItem(
             context,
             Icons.analytics_outlined,
             "AI Analytics",
-            false,
+            "ai_reports"
           ),
 
           const Spacer(),
@@ -51,7 +53,7 @@ class AdminSideMenu extends StatelessWidget {
             context,
             Icons.logout,
             "Logout",
-            false,
+         "logout",
             isLogout: true,
           ),
           const SizedBox(height: 20),
@@ -64,10 +66,11 @@ class AdminSideMenu extends StatelessWidget {
     BuildContext context,
     IconData icon,
     String title,
-
-    bool isActive, {
+      String routeName,
+  {
     bool isLogout = false,
   }) {
+    bool isActive = context.watch<NavigationProvider>().currentRoute == routeName;
     final theme = Theme.of(context);
     final primaryColor = theme.primaryColor;
     final textColor = isLogout
@@ -100,6 +103,7 @@ class AdminSideMenu extends StatelessWidget {
               ),
             );
           }
+          context.read<NavigationProvider>().changeRoute(routeName);
         } ,
       ),
     );

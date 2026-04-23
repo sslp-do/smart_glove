@@ -23,7 +23,7 @@ class TherapistDashboard extends StatelessWidget {
          const AdminSideMenu(),
 
           //Main Content
-          TherapistMainContent(index: index),
+          Expanded(child: TherapistMainContent()),
         ],
       ),
     );

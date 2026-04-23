@@ -34,7 +34,7 @@ void main() async{
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeMode.system,
-          home: PatientDashboard()/* SplashScreen(),*/
+          home: TherapistDashboard()/* SplashScreen(),*/
       ),
     ),
 
