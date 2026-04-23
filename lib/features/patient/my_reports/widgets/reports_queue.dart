@@ -58,7 +58,6 @@ class RepotsQueue extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // رأس البطاقة (التاريخ والتمرين)
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

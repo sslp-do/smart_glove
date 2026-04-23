@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_glove/ui/login/screen/login.dart';
+
+import '../../../../core/providers/navigation_provider.dart';
 
 class PatientSideMenu extends StatelessWidget {
   final bool isCollapsed;
@@ -9,7 +12,7 @@ class PatientSideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
+  String   routName = context.watch<NavigationProvider>().currentRoute;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
@@ -32,16 +35,13 @@ class PatientSideMenu extends StatelessWidget {
 
           const SizedBox(height: 50),
           // Menu Items
-          _buildMenuItem(Icons.dashboard, "Dashboard", true, context),
-          _buildMenuItem(Icons.analytics, "My Reports", false, context),
-        /*  _buildMenuItem(Icons.chat, "Chat with Therapist", false, context),*/
-          _buildMenuItem(Icons.settings, "Settings", false, context),
-
+          _buildMenuItem(Icons.dashboard, "Dashboard", context, routeName: "overview"),
+          _buildMenuItem(Icons.analytics, "My Reports",  context , routeName: "my_reports"),
+          _buildMenuItem(Icons.settings, "Settings", context , routeName: "settings"),
           const Spacer(),
           _buildMenuItem(
             Icons.logout,
             "Logout",
-            false,
             context,
             isLogout: true,
           ),
@@ -54,11 +54,11 @@ class PatientSideMenu extends StatelessWidget {
   Widget _buildMenuItem(
     IconData icon,
     String title,
-    bool isActive,
-
     BuildContext context, {
     bool isLogout = false,
+        String routeName = "",
   }) {
+    bool isActive = context.watch<NavigationProvider>().currentRoute == routeName;
     final theme = Theme.of(context);
     final color = isLogout
         ? theme.colorScheme.error
@@ -92,6 +92,7 @@ class PatientSideMenu extends StatelessWidget {
               ),
             );
           }
+          context.read<NavigationProvider>().changeRoute(routeName);
         },
       ),
     );

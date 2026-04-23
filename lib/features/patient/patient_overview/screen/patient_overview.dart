@@ -11,18 +11,20 @@ class PatientOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        HeaderSection(),
-        SizedBox(height: 30),
-        StartSessionCard(),
-        SizedBox(height: 30),
-        StatsGrid(), SizedBox(height: 30),
-        BadgesSection(),
-        SizedBox(height: 30),
-        ProgressChartSection(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          HeaderSection(),
+          SizedBox(height: 30),
+          StartSessionCard(),
+          SizedBox(height: 30),
+          StatsGrid(), SizedBox(height: 30),
+          BadgesSection(),
+          SizedBox(height: 30),
+          ProgressChartSection(), SizedBox(height: 30),
+        ],
+      ),
     );
   }
 }

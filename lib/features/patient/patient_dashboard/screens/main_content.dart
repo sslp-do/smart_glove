@@ -1,33 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/core/providers/navigation_provider.dart';
 import 'package:smart_glove/features/patient/my_reports/screen/my_reports.dart';
 import 'package:smart_glove/features/patient/patient_overview/screen/patient_overview.dart';
 import 'package:smart_glove/features/patient/settings/screen/settings.dart';
 
-class MainContent extends StatefulWidget {
-  String routeName;
+class MainContent extends StatelessWidget {
 
-  MainContent({super.key, required this.routeName});
-
-  @override
-  State<MainContent> createState() => _MainContentState(routeName);
-}
-
-class _MainContentState extends State<MainContent> {
-  String routeName = "overview";
-
-  _MainContentState(this.routeName);
+ const MainContent({super.key,});
 
   @override
   Widget build(BuildContext context) {
+    String routeName = context.watch<NavigationProvider>().currentRoute;
     return
-    Expanded(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(32.0),
-        child: Container(
-          child:
-             _buildBody(routeName)
-        ),
-      ),
+    Container(
+         padding: EdgeInsets.symmetric(horizontal: 30,vertical: 20),
+   // color: Colors.red,
+      child:
+         _buildBody(routeName)
     );
   }
 }
@@ -37,8 +27,7 @@ Widget _buildBody(String routeName) {
       case "overview":
         return const PatientOverview();
       case "my_reports":
-        return const PatientReportsScreen();
-      case "settings":
+        return const PatientReportsScreen();case "settings":
         return const PatientSettings();
       default:
         return const PatientOverview();
