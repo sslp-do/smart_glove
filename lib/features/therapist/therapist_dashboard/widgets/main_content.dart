@@ -37,7 +37,7 @@ Widget _buildBody(String routName){
     case "overview": return const Overview();
     case "all_patients": return const AllPatientsScreen();
     case "exercises": return const TherapistExercisesScreen();
-    case "feedback": return const TherapistFeedbackScreen();
+  //  case "feedback": return const TherapistFeedbackScreen();
     case "ai_reports": return const TherapistAIReports();
     default: return const Overview();
   }

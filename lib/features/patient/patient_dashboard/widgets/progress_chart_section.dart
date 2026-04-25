@@ -33,10 +33,10 @@ class ProgressChartSection extends StatelessWidget {
                 gridData: FlGridData(show: false),
                 titlesData: FlTitlesData(
                   leftTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: true, reservedSize: 40),
+                    sideTitles: SideTitles(showTitles: false, reservedSize: 40),
                   ),
                   bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(showTitles: true, reservedSize: 30),
+                    sideTitles: SideTitles(showTitles: true, reservedSize: 30, interval: 1),
                   ),
                   topTitles: AxisTitles(
                     sideTitles: SideTitles(showTitles: false),

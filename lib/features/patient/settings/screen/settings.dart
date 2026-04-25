@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/core/providers/theme_provider.dart';
 
 class PatientSettings extends StatefulWidget {
   const PatientSettings({super.key});
@@ -117,8 +119,10 @@ class _PatientSettingsState extends State<PatientSettings> {
                     subtitle: const Text(
                       "Easier on the eyes in low light conditions",
                     ),
-                    value: _darkMode,
-                    onChanged: (val) => setState(() => _darkMode = val),
+                    value: context.watch<ThemeProvider>().isDarkMode,
+                    onChanged: context
+                        .watch<ThemeProvider>()
+                        .toggleTheme /*(val) => setState(() => _darkMode = val*/,
                   ),
                 ]),
                 const SizedBox(height: 40),

@@ -11,12 +11,13 @@ class PatientSideMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double menuWidth = isCollapsed ? 80 : 250;
     final theme = Theme.of(context);
-  String   routName = context.watch<NavigationProvider>().currentRoute;
+  String routName = context.watch<NavigationProvider>().currentRoute;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
-      width: isCollapsed ? 80 : 250,
+      width: menuWidth,
       color: theme.cardTheme.color,
       child: Column(
         children: [
@@ -73,6 +74,11 @@ class PatientSideMenu extends StatelessWidget {
             )
           : null,
       child: ListTile(
+        contentPadding: isCollapsed
+            ? const EdgeInsets.symmetric(horizontal:10)
+            : const EdgeInsets.symmetric(horizontal: 16),
+
+        minLeadingWidth: isCollapsed ? 15 : 40,
         leading: Icon(icon, color: color),
         title: isCollapsed
             ? null
