@@ -1,9 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_glove/core/providers/alerts_provider.dart';
 import 'package:smart_glove/core/providers/theme_provider.dart';
 import 'package:smart_glove/features/patient/my_reports/screen/my_reports.dart';
 import 'package:smart_glove/features/patient/patient_dashboard/screens/patient_dashboard.dart';
 import 'package:smart_glove/features/patient/settings/screen/settings.dart';
+import 'package:smart_glove/features/therapist/logic/category_provider.dart';
 import 'package:smart_glove/features/therapist/therapist_dashboard/screen/therapist_dashboard.dart';
 import 'package:smart_glove/features/therapist/therapist_feedback/screen/therapist_feedback.dart';
 import 'package:smart_glove/ui/login/screen/login.dart';
@@ -33,6 +36,8 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => NavigationProvider()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => AlertsProvider()),
+        ChangeNotifierProvider(create: (context) => CategoryProvider()),
       ],
       child: const Application(),
     ),

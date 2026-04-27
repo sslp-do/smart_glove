@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/active_patients_table.dart';
 import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/ai_reports_queue.dart';
 import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/live_monitoring.dart';
+import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/smart_alerts.dart';
 import 'package:smart_glove/features/therapist/therapist_dashboard/widgets/stats_row.dart';
-
 
 class Overview extends StatelessWidget {
   const Overview({super.key});
@@ -26,9 +26,12 @@ class Overview extends StatelessWidget {
           const SizedBox(height: 30),
 
           // Monitoring section
-          const LiveMonitoringSection(),
+          const SmartAlerts(),
+          const SizedBox(height: 30),
+          const ActivePatientsTable(),
+          const SizedBox(height: 30),
 
-          // Patients Quick Overview
+      /*    // Patients Quick Overview
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -38,7 +41,7 @@ class Overview extends StatelessWidget {
               // AI Reports Overview
               Expanded(flex: 4, child: const AIReportsQueue()),
             ],
-          ),
+          ),*/
         ],
       ),
     );

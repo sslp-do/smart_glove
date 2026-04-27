@@ -13,10 +13,10 @@ class LiveMonitoringSection extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 30), // مسافة عن القسم الذي يليه
+      margin: const EdgeInsets.only(bottom: 30),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        // لون خلفية مميز قليلاً (أزرق داكن جداً أو حسب الثيم) للفت الانتباه
+       
         color: theme.brightness == Brightness.dark
             ? const Color(0xFF1A237E).withOpacity(0.3)
             : Colors.blue.shade50,
