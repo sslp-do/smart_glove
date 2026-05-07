@@ -100,12 +100,12 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
           IconButton(
             icon: const Icon(Icons.check_circle),
             onPressed: () { simulateGloveData();},
-          ), IconButton(
+          ), /*IconButton(
             icon: const Icon(Icons.share_arrival_time),
             onPressed: () { SoundManager.playSessionComplete();
               finishSession();
               },
-          ),
+          ),*/
 
           _buildSensorState(context),
         ],
@@ -157,7 +157,7 @@ Widget _buildSensorState(BuildContext context){
         Icon(Icons.link, color: Colors.green, size: 16),
         SizedBox(width: 8),
         Text(
-          "Sensor Active",
+          "Glove Active",
           style: TextStyle(
             color: Colors.green,
             fontWeight: FontWeight.bold,

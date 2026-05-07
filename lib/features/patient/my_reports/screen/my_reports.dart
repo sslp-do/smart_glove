@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_glove/features/patient/my_reports/widgets/hero_card.dart';
 import 'package:smart_glove/features/patient/my_reports/widgets/reports_queue.dart';
+import 'package:smart_glove/features/patient/patient_dashboard/widgets/header_section.dart';
 
 class PatientReportsScreen extends StatelessWidget {
   const PatientReportsScreen({super.key});
@@ -12,31 +13,27 @@ class PatientReportsScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("My Progress & Reports", style: theme.textTheme.displayMedium),
-              IconButton(icon: const Icon(Icons.help_outline), onPressed: () {}),
-            ],
-          ),
-            const SizedBox(height: 20),
-      
+          HeaderSection(),
+
+          const SizedBox(height: 20),
+
           //  1. Hero Card
           HeroCard(),
-            const SizedBox(height: 30),
-      
+          const SizedBox(height: 30),
+
           //   2. title
           const Text(
-            "Doctor's Feedback",
+            "Reports History",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
           ),
-             const SizedBox(height: 16),
-      
+          const SizedBox(height: 16),
+
           //  3. reports queue
           RepotsQueue(),
         ],

@@ -13,7 +13,7 @@ class simulationSection extends StatelessWidget {
         child: Column(
           children: [
             // Exercise name
-            _buildHeader(context, "Fist Grip Exercise", "Repetition: 3/10"),
+            _buildHeader(context, "Fist Grip Exercise", "Exercise No. 3/10"),
 
             const Spacer(),
 

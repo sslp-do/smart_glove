@@ -22,7 +22,6 @@ class _PatientSettingsState extends State<PatientSettings> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          title(),
           Container(
             height: MediaQuery.of(context).size.height,
             child: Column(

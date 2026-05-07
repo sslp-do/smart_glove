@@ -1,6 +1,10 @@
+import 'package:confetti/confetti.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/utils/sound_manager.dart';
 
 class controlSection extends StatelessWidget {
   const controlSection({super.key});
@@ -51,12 +55,12 @@ Widget _buildIndicators(BuildContext context) {
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
       // strength indicator
-      _strengthIndicator(context,0.75),
+      _strengthIndicator(context, 0.75),
 
       SizedBox(width: 10),
 
       // Timer indicator
-      _timerIndicator(context,0.7),
+      _timerIndicator(context, 0.7),
     ],
   );
 }
@@ -68,10 +72,7 @@ Widget _strengthIndicator(BuildContext context, double currentProgress) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text(
-        "Grip Strength",
-        style: theme.textTheme.titleLarge,
-      ),
+      Text("Grip Strength", style: theme.textTheme.titleLarge),
       const SizedBox(height: 20),
       Container(
         decoration: BoxDecoration(
@@ -93,17 +94,14 @@ Widget _strengthIndicator(BuildContext context, double currentProgress) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "${(currentProgress*100).toInt()}%",
+                "${(currentProgress * 100).toInt()}%",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30.0,
                   color: textColor,
                 ),
               ),
-              Text(
-                "Power",
-                style: theme.textTheme.bodyMedium,
-              ),
+              Text("Power", style: theme.textTheme.bodyMedium),
             ],
           ),
           circularStrokeCap: CircularStrokeCap.round,
@@ -115,7 +113,7 @@ Widget _strengthIndicator(BuildContext context, double currentProgress) {
   );
 }
 
-Widget _timerIndicator(BuildContext context , double timerValue) {
+Widget _timerIndicator(BuildContext context, double timerValue) {
   final theme = Theme.of(context);
   final textColor = theme.textTheme.titleLarge?.color;
 
@@ -163,10 +161,7 @@ Widget _buildLiveChart(BuildContext context) {
 
   return Column(
     children: [
-      Text(
-        "Force Sensor Data",
-        style: theme.textTheme.titleLarge,
-      ),
+      Text("Force Sensor Data", style: theme.textTheme.titleLarge),
       const SizedBox(height: 10),
       SizedBox(
         height: 150,
@@ -207,28 +202,94 @@ Widget _buildLiveChart(BuildContext context) {
 }
 
 Widget _buildControlButtons(BuildContext context) {
-  return Row(
-    children: [
-      Expanded(
-        child: ElevatedButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.pause),
-          label: const Text("Pause"),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.amber[700],
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-          ),
-        ),
+
+  void finishSession() {
+   late ConfettiController _confettiController = ConfettiController(duration: const Duration(seconds: 1));
+    SoundManager.playSessionComplete();
+
+    _confettiController.play();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Great Job! 🎉"),
+        content: const Text("Session completed successfully. See you tomorrow!"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+                 Navigator.pop(context);
+            },
+            child: const Text("Done"),
+          )
+        ],
       ),
-      const SizedBox(width: 16),
-      Expanded(
-        child: ElevatedButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.stop),
-          label: const Text("Stop"),
+    );
+  }
+  //final gloveProvider = Provider.of<GloveProvider>(context);
+  final theme = Theme.of(context);
+  return Column(
+    children: [
+      Row(
+        children: [
+          Expanded(
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.pause),
+              label: const Text("Pause"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber[700],
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.skip_next),
+              label: const Text("Skip"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+              ),
+            ),
+          ),
+        ],
+      ),
+      SizedBox(height: 10),
+      SizedBox(
+        height: 50,
+        child: ElevatedButton(
+          onPressed:() { SoundManager.playSessionComplete();
+          finishSession();
+          }/* gloveProvider.isSaving
+              ? null
+              : () async {
+            await context.read<GloveProvider>().endAndSaveSession(
+              patientName: "dounia",
+              patientNumber: "12345",
+            );
+
+
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Saved in Firebase')),
+              );
+              // Navigator.pushNamed(context, '/reports'); // اختياري: الانتقال للتقارير
+            }
+          }*/,
+          child:/* gloveProvider.isSaving
+              ? const SizedBox(
+              height: 20,
+              width: 20,
+              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white)
+          )
+              : */Text("End Session"),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).colorScheme.error,
+            backgroundColor: theme.primaryColor,
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
