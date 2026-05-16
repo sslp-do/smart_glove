@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 
 class StatsGrid extends StatelessWidget {
-  const StatsGrid({super.key});
+  final PatientProvider patientProvider;
+  const StatsGrid({super.key , required this.patientProvider});
 
   @override
   Widget build(BuildContext context) {
+    final patient = patientProvider.currentPatient;
     return Row(
       children: [
-        _buildStatCard("Current Streak 🔥", "8 Days", Colors.orange, context),
+        _buildStatCard("Current Streak 🔥", "${patient?.streak ?? 0} Days", Colors.orange, context),
         const SizedBox(width: 20),
-        _buildStatCard("Total Sessions ✅", "12 Sessions", Colors.blue, context),
+        _buildStatCard("Total Sessions ✅", "${patient?.totalSessions ?? 0} Sessions", Colors.blue, context),
         const SizedBox(width: 20),
-        _buildStatCard("Improvement 📈", "+15%", Colors.purple, context),
+        _buildStatCard("Improvement 📈", "+${patient?.improvement ?? 0}%", Colors.purple, context),
       ],
     );
   }

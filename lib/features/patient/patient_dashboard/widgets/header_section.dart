@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/features/patient/providers/glove_provider.dart';
+import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 import 'battery_status.dart';
 
 class HeaderSection extends StatelessWidget {
-  const HeaderSection({super.key});
+  final PatientProvider patientProvider;
+  final GloveProvider gloveProvider;
+
+   HeaderSection({super.key, required this.patientProvider, required this.gloveProvider});
 
   @override
   Widget build(BuildContext context) {
+   /* final patientProvider = context.watch<PatientProvider>();
+    context.read<PatientProvider>().fetchPatientData("patientId");
+    final gloveProvider = context.watch<GloveProvider>();*/
     final theme = Theme.of(context);
 
     return Row(
@@ -15,7 +24,7 @@ class HeaderSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Good Morning, Sarah 👋",
+              "Hello Again, ${patientProvider.currentPatient?.name ?? 'Guest'} 👋",
               style: theme.textTheme.displayMedium,
             ),
             Text(
@@ -25,7 +34,7 @@ class HeaderSection extends StatelessWidget {
           ],
         ),
         // Glove Connection Status & Battery Indicator
-        GloveBatteryStatus(batteryLevel: 75),
+        GloveBatteryStatus(batteryLevel: gloveProvider.status.battery),
       ],
     );
   }

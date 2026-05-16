@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 
 class HeroCard extends StatelessWidget {
-  const HeroCard({super.key});
+  final patient;
+  const HeroCard({super.key, required this.patient});
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryColor = Colors.teal;
+     const Color primaryColor = Colors.teal;
 
     return Container(
       width: double.infinity,
@@ -33,9 +36,9 @@ class HeroCard extends StatelessWidget {
             style: TextStyle(color: Colors.white70, fontSize: 14),
           ),
           const SizedBox(height: 8),
-          const Text(
-            "You're doing great, Sarah!",
-            style: TextStyle(
+          Text(
+            "You're doing great, ${patient.name ?? "Guest"}!",
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -45,9 +48,9 @@ class HeroCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildStatItem("Sessions", "24", Colors.white),
-              _buildStatItem("Streak", "5 Days", Colors.orangeAccent),
-              _buildStatItem("Avg. Score", "85%", Colors.greenAccent),
+              _buildStatItem("Sessions", patient?.totalSessions.toString() ?? "0", Colors.white),
+              _buildStatItem("Streak", patient?.streak.toString() ?? "0", Colors.orangeAccent),
+             _buildStatItem("Improvement", patient?.improvement.toString() ?? "0", Colors.greenAccent),
             ],
           ),
         ],

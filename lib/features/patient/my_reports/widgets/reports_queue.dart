@@ -125,9 +125,6 @@ class RepotsQueue extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
-
-              // رسالة الطبيب (Doctor's Note)
 
             ],
           ),

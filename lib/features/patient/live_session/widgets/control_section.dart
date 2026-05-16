@@ -15,7 +15,7 @@ class controlSection extends StatelessWidget {
     final cardColor = theme.cardTheme.color;
 
     return Expanded(
-      flex: 4,
+      flex: 3,
       child: Container(
         padding: const EdgeInsets.all(24),
         color: cardColor,
@@ -37,9 +37,9 @@ class controlSection extends StatelessWidget {
             const Spacer(),
 
             // Live chart
-            _buildLiveChart(context),
+            //_buildLiveChart(context),
 
-            const Spacer(),
+           // const Spacer(),
 
             // Control Buttons
             _buildControlButtons(context),
@@ -51,13 +51,13 @@ class controlSection extends StatelessWidget {
 }
 
 Widget _buildIndicators(BuildContext context) {
-  return Row(
+  return Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
       // strength indicator
       _strengthIndicator(context, 0.75),
 
-      SizedBox(width: 10),
+      SizedBox(height: 30),
 
       // Timer indicator
       _timerIndicator(context, 0.7),
@@ -72,7 +72,7 @@ Widget _strengthIndicator(BuildContext context, double currentProgress) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text("Grip Strength", style: theme.textTheme.titleLarge),
+      Text("Progress Rate", style: theme.textTheme.titleLarge),
       const SizedBox(height: 20),
       Container(
         decoration: BoxDecoration(
@@ -139,7 +139,7 @@ Widget _timerIndicator(BuildContext context, double timerValue) {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "04:20",
+                  "01:20",
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -244,7 +244,7 @@ Widget _buildControlButtons(BuildContext context) {
               ),
             ),
           ),
-          const SizedBox(width: 16),
+     /*     const SizedBox(width: 16),
           Expanded(
             child: ElevatedButton.icon(
               onPressed: () {},
@@ -256,7 +256,7 @@ Widget _buildControlButtons(BuildContext context) {
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
             ),
-          ),
+          ),*/
         ],
       ),
       SizedBox(height: 10),

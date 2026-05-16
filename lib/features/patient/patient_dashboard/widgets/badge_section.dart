@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_glove/core/models/badge_item.dart';
+import 'package:smart_glove/core/providers/badges_provider.dart';
+import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 
 
 class BadgesSection extends StatelessWidget {
-  const BadgesSection({super.key});
+  final List<BadgeItem> badges ;
+   BadgesSection({super.key, required this.badges});
 
   @override
   Widget build(BuildContext context) {
+
     final theme = Theme.of(context);
 
     return Container(
@@ -21,10 +26,10 @@ class BadgesSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const Text("Achievements & Badges 🏆", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              TextButton(onPressed: () {}, child: const Text("View All"))
+             // TextButton(onPressed: () {}, child: const Text("View All"))
             ],
           ),
           const SizedBox(height: 20),
@@ -34,10 +39,10 @@ class BadgesSection extends StatelessWidget {
             height: 110,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: demoBadges.length,
+              itemCount: badges.length,
               separatorBuilder: (context, index) => const SizedBox(width: 20),
               itemBuilder: (context, index) {
-                final badge = demoBadges[index];
+                final badge = badges[index];
                 return Tooltip(
                   message: badge.isUnlocked ? "Unlocked: ${badge.description}" : "Locked: ${badge.description}",
                   child: Opacity(

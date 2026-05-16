@@ -2,13 +2,20 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_glove/core/utils/sound_manager.dart';
+import 'package:smart_glove/features/patient/live_session/widgets/build_sensor_state.dart';
 import 'package:smart_glove/features/patient/live_session/widgets/control_section.dart';
 import 'package:smart_glove/features/patient/live_session/widgets/simulation_section.dart';
+import 'package:smart_glove/features/patient/models/exercise_model.dart';
+import 'package:smart_glove/features/patient/providers/glove_provider.dart';
+import 'package:smart_glove/features/patient/providers/patient_provider.dart';
+import 'package:smart_glove/features/patient/providers/session_provider.dart';
 
 
 class LiveSessionScreen extends StatefulWidget {
-  const LiveSessionScreen({super.key});
+  final Exercise currentExercise ;
+   LiveSessionScreen({super.key , required this.currentExercise});
 
   @override
   State<LiveSessionScreen> createState() => _LiveSessionScreenState();
@@ -46,19 +53,16 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
 
   void finishSession() {
     SoundManager.playSessionComplete();
-
     _confettiController.play();
-
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Great Job! 🎉"),
+        title: const Text("Great Job! 🎉", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
         content: const Text("Session completed successfully. See you tomorrow!"),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-           /*   Navigator.pop(context);*/
             },
             child: const Text("Done"),
           )
@@ -71,6 +75,16 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
   void initState() {
     super.initState();
     _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+
+    // القاعدة: تشغيل الجلسة بيصير مرة واحدة عند فتح الشاشة، لهيك بنستخدم read
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // نفترض أننا مجهزين التمرين في البروفايدر الآخر، أو بنمرره للشاشة
+         context.read<SessionProvider>().startSession(widget.currentExercise);
+      });
+    } on Exception catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -79,11 +93,12 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
     super.dispose();
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
+  /*  context.read<PatientProvider>().fetchNextExercise("patientId");
+    Exercise nextExercise = context.read<PatientProvider>().nextExercise!;
+    context.read<SessionProvider>().startSession(nextExercise);*/
+    final sessionWatch = context.watch<SessionProvider>();
     final bgColor = Theme
         .of(context)
         .scaffoldBackgroundColor;
@@ -97,17 +112,7 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.check_circle),
-            onPressed: () { simulateGloveData();},
-          ), /*IconButton(
-            icon: const Icon(Icons.share_arrival_time),
-            onPressed: () { SoundManager.playSessionComplete();
-              finishSession();
-              },
-          ),*/
-
-          _buildSensorState(context),
+          buildSensorState(context.watch<GloveProvider>().status.isConnected),
         ],
       ),
       body: Stack(
@@ -134,7 +139,7 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
                 Colors.orange,
                 Colors.purple
               ],
-              createParticlePath: drawStar,
+              createParticlePath: (size) => SessionProvider().drawStar(size),
             ),
           ),
         ],
@@ -143,51 +148,7 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
   }
 }
 
-Widget _buildSensorState(BuildContext context){
-  return Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-    padding: const EdgeInsets.symmetric(horizontal: 12),
-    decoration: BoxDecoration(
-      color: Colors.green.withOpacity(0.1),
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(color: Colors.green),
-    ),
-    child: Row(
-      children: const [
-        Icon(Icons.link, color: Colors.green, size: 16),
-        SizedBox(width: 8),
-        Text(
-          "Glove Active",
-          style: TextStyle(
-            color: Colors.green,
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-        ),
-      ],
-    ),
-  );
-}
 
-Path drawStar(Size size) {
-  double degToRad(double deg) => deg * (pi / 180.0);
-  const numberOfPoints = 5;
-  final halfWidth = size.width / 2;
-  final externalRadius = halfWidth;
-  final internalRadius = halfWidth / 2.5;
-  final degreesPerStep = degToRad(360 / numberOfPoints);
-  final halfDegreesPerStep = degreesPerStep / 2;
-  final path = Path();
-  final fullAngle = degToRad(360);
-  path.moveTo(size.width, halfWidth);
-
-  for (double step = 0; step < fullAngle; step += degreesPerStep) {
-    path.lineTo(halfWidth + externalRadius * cos(step), halfWidth + externalRadius * sin(step));
-    path.lineTo(halfWidth + internalRadius * cos(step + halfDegreesPerStep), halfWidth + internalRadius * sin(step + halfDegreesPerStep));
-  }
-  path.close();
-  return path;
-}
 
 
 

@@ -1,11 +1,21 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 
 class ProgressChartSection extends StatelessWidget {
-  const ProgressChartSection({super.key});
+final Map<String , int> weeklyProgress ;
+  const ProgressChartSection({super.key , required this.weeklyProgress});
 
   @override
   Widget build(BuildContext context) {
+    final sortedKeys = weeklyProgress.keys.toList()..sort();
+    final List<FlSpot> spots = sortedKeys.asMap().entries.map((entry) {
+      int index = entry.key;
+      String dateKey = entry.value;
+      return FlSpot(index.toDouble(), weeklyProgress[dateKey]!.toDouble());
+    }).toList();
+
     final theme = Theme.of(context);
 
     return Container(
@@ -48,15 +58,7 @@ class ProgressChartSection extends StatelessWidget {
                 borderData: FlBorderData(show: false),
                 lineBarsData: [
                   LineChartBarData(
-                    spots: [
-                      const FlSpot(0, 20),
-                      const FlSpot(1, 35),
-                      const FlSpot(2, 40),
-                      const FlSpot(3, 38),
-                      const FlSpot(4, 55),
-                      const FlSpot(5, 60),
-                      const FlSpot(6, 75),
-                    ],
+                    spots: spots.isEmpty ? [const FlSpot(0, 0)] : spots,
                     isCurved: true,
                     color: theme.primaryColor,
                     barWidth: 4,
