@@ -75,16 +75,6 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
   void initState() {
     super.initState();
     _confettiController = ConfettiController(duration: const Duration(seconds: 3));
-
-    // القاعدة: تشغيل الجلسة بيصير مرة واحدة عند فتح الشاشة، لهيك بنستخدم read
-    try {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        // نفترض أننا مجهزين التمرين في البروفايدر الآخر، أو بنمرره للشاشة
-         context.read<SessionProvider>().startSession(widget.currentExercise);
-      });
-    } on Exception catch (e) {
-      print(e.toString());
-    }
   }
 
   @override
@@ -95,10 +85,6 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
 
   @override
   Widget build(BuildContext context) {
-  /*  context.read<PatientProvider>().fetchNextExercise("patientId");
-    Exercise nextExercise = context.read<PatientProvider>().nextExercise!;
-    context.read<SessionProvider>().startSession(nextExercise);*/
-    final sessionWatch = context.watch<SessionProvider>();
     final bgColor = Theme
         .of(context)
         .scaffoldBackgroundColor;

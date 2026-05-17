@@ -7,15 +7,14 @@ import 'package:smart_glove/features/patient/providers/glove_provider.dart';
 import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 
 class PatientReportsScreen extends StatelessWidget {
+
+
   const PatientReportsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    context.read<PatientProvider>().fetchPatientData("patientId");
-    final patientProvider = context.watch<PatientProvider>();
-    final gloveProvider = context.watch<GloveProvider>();
-    //  TODO: needs enhancement
+  final gloveProvider = Provider.of<GloveProvider>(context);
+  final patientProvider = Provider.of<PatientProvider>(context);
     final theme = Theme.of(context);
     return SingleChildScrollView(
       child: Column(

@@ -33,14 +33,15 @@ void main() async {
   } catch (e) {
     print("Firebase Init Error: $e");
   }
-   await windowManager.ensureInitialized();
+  await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
     size: Size(1200, 800),
     minimumSize: Size(950, 600),
     center: true,
     title: "Smart Glove",
-  );  windowManager.waitUntilReadyToShow(windowOptions, () async {
+  );
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();
   });
@@ -48,17 +49,17 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => PatientProvider()),
+        ChangeNotifierProvider(create: (context) => ExerciseProvider()),
+        ChangeNotifierProvider(create: (context) => SessionProvider()),
         ChangeNotifierProvider(create: (context) => NavigationProvider()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => AlertsProvider()),
         ChangeNotifierProvider(create: (context) => CategoryProvider()),
-        ChangeNotifierProvider(create: (context) => TestMonitorProvider()),
         ChangeNotifierProvider(create: (context) => GloveProvider()),
-        ChangeNotifierProvider(create: (context) => PatientProvider()),
-        ChangeNotifierProvider(create: (context) => SessionProvider()),
-        ChangeNotifierProvider(create: (context) => ExerciseProvider()),
         ChangeNotifierProvider(create: (context) => HistoryProvider()),
         ChangeNotifierProvider(create: (context) => BadgesProvider()),
+        ChangeNotifierProvider(create: (context) => TestMonitorProvider()),
       ],
       child: const Application(),
     ),
@@ -75,7 +76,7 @@ class Application extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: context.watch<ThemeProvider>().themeMode,
-      home: PatientDashboard(),  /*SplashScreen()*/
+      home: PatientDashboard() /*SplashScreen()*/,
     );
   }
 }

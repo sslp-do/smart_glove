@@ -36,11 +36,6 @@ class controlSection extends StatelessWidget {
 
             const Spacer(),
 
-            // Live chart
-            //_buildLiveChart(context),
-
-           // const Spacer(),
-
             // Control Buttons
             _buildControlButtons(context),
           ],

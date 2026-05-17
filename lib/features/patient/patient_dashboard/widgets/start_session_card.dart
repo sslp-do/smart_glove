@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_glove/features/patient/live_session/screen/live_session.dart';
+import 'package:smart_glove/features/patient/models/exercise_model.dart';
 import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 import 'package:smart_glove/features/patient/providers/session_provider.dart';
 
 class StartSessionCard extends StatelessWidget {
-  final PatientProvider patientProvider;
-  const StartSessionCard({super.key, required this.patientProvider});
+  final Exercise exercise;
+  const StartSessionCard({super.key, required this.exercise});
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +51,13 @@ class StartSessionCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                  Text(
-                  "Exercise: ${patientProvider.nextExercise?.title ?? "No Exercise"}",
+                  "Exercise: ${exercise.title ?? "No Exercise"}",
                   style:
                    theme.textTheme.displayMedium!.copyWith(color: Colors.white)
                 ),
                 const SizedBox(height: 5),
                  Text(
-                  "Duration: ${patientProvider.nextExercise?.duration??0} mins • Reps: ${patientProvider.nextExercise?.targetRepetitions??0} ",
+                  "Duration: ${exercise.duration??0} mins • Reps: ${exercise.targetRepetitions??0} ",
                   style: theme.textTheme.titleLarge!.copyWith(color: Colors.white),
                 ),
                 const SizedBox(height: 20),
@@ -64,7 +65,7 @@ class StartSessionCard extends StatelessWidget {
                   onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LiveSessionScreen(currentExercise: patientProvider.nextExercise!)),
+                    MaterialPageRoute(builder: (context) => LiveSessionScreen(currentExercise: exercise)),
                   );
                   },
                   icon: const Icon(Icons.play_arrow),
