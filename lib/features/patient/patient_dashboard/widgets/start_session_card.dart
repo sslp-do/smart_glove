@@ -7,6 +7,7 @@ import 'package:smart_glove/features/patient/providers/session_provider.dart';
 
 class StartSessionCard extends StatelessWidget {
   final Exercise exercise;
+
   const StartSessionCard({super.key, required this.exercise});
 
   @override
@@ -44,32 +45,47 @@ class StartSessionCard extends StatelessWidget {
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child:  Text(
+                  child: Text(
                     "Today's Session",
-                   style: theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                    style: theme.textTheme.bodyMedium!.copyWith(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),
-                 Text(
+                Text(
                   "Exercise: ${exercise.title ?? "No Exercise"}",
-                  style:
-                   theme.textTheme.displayMedium!.copyWith(color: Colors.white)
+                  style: theme.textTheme.displayMedium!.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(height: 5),
-                 Text(
-                  "Duration: ${exercise.duration??0} mins • Reps: ${exercise.targetRepetitions??0} ",
-                  style: theme.textTheme.titleLarge!.copyWith(color: Colors.white),
+                Text(
+                  "Duration: ${exercise.duration ?? 0} mins • Reps: ${exercise.targetRepetitions ?? 0} ",
+                  style: theme.textTheme.titleLarge!.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
                   onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LiveSessionScreen(currentExercise: exercise)),
-                  );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChangeNotifierProvider(
+                          create: (context) => SessionProvider(),
+                          child: LiveSessionScreen(currentExercise: exercise,),
+                        ),
+                      ),
+                    );
                   },
                   icon: const Icon(Icons.play_arrow),
-                  label:  Text("Start Session Now", style: theme.textTheme.titleLarge!.copyWith(color: theme.primaryColor),),
+                  label: Text(
+                    "Start Session Now",
+                    style: theme.textTheme.titleLarge!.copyWith(
+                      color: theme.primaryColor,
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: theme.cardColor,
                     padding: const EdgeInsets.symmetric(

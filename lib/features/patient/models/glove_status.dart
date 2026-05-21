@@ -8,4 +8,12 @@ class GloveStatus {
     required this.isConnected,
     this.isCharging = false,
   });
+
+  factory GloveStatus.fromJson(Map<String, dynamic> json) {
+    return GloveStatus(
+      battery: json['battery'] ?? 0,
+      isConnected: json['isConnected'] ?? false,
+      isCharging: json['isCharging'] ?? false,
+    );
+  }
 }

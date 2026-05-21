@@ -30,4 +30,14 @@ class Exercise {
       duration: json['duration'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'title': title,
+    'description': description,
+    'tutorialImageUrl': tutorialImageUrl,
+    'targetData': targetData.toJson(),
+    'targetRepetitions': targetRepetitions,
+    'duration': duration,
+  };
 }

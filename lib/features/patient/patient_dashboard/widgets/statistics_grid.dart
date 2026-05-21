@@ -3,11 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 
 class StatsGrid extends StatelessWidget {
-  final PatientProvider patientProvider;
-  const StatsGrid({super.key , required this.patientProvider});
+  const StatsGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final patientProvider = Provider.of<PatientProvider>(context);
     final patient = patientProvider.currentPatient;
     return Row(
       children: [

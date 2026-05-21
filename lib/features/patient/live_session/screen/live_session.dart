@@ -12,21 +12,21 @@ import 'package:smart_glove/features/patient/providers/glove_provider.dart';
 import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 import 'package:smart_glove/features/patient/providers/session_provider.dart';
 
-
 class LiveSessionScreen extends StatefulWidget {
-  final Exercise currentExercise ;
-   LiveSessionScreen({super.key , required this.currentExercise});
+  final Exercise currentExercise;
+
+  LiveSessionScreen({super.key, required this.currentExercise});
 
   @override
   State<LiveSessionScreen> createState() => _LiveSessionScreenState();
 }
 
 class _LiveSessionScreenState extends State<LiveSessionScreen> {
-
   double sensorValue = 0.0;
   bool isTargetReached = false;
 
-  bool _hasPlayedSuccessSound = false; // True if the success sound has been played
+  bool _hasPlayedSuccessSound =
+      false; // True if the success sound has been played
 
   late ConfettiController _confettiController;
 
@@ -37,7 +37,6 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
 
       if (sensorValue > 0.8) {
         if (!_hasPlayedSuccessSound) {
-
           SoundManager.playSuccess();
 
           _hasPlayedSuccessSound = true;
@@ -45,7 +44,6 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
           // repetitionsCount++;
         }
       } else {
-
         _hasPlayedSuccessSound = false;
       }
     });
@@ -54,27 +52,37 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
   void finishSession() {
     SoundManager.playSessionComplete();
     _confettiController.play();
-    showDialog(
+
+   // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  ResultScreen(session:)));
+
+    /*   showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Great Job! 🎉", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
-        content: const Text("Session completed successfully. See you tomorrow!"),
+        title: const Text(
+          "Great Job! 🎉",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+        ),
+        content: const Text(
+          "Session completed successfully. See you tomorrow!",
+        ),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
             child: const Text("Done"),
-          )
+          ),
         ],
-      ),
-    );
+      ),*/
+
   }
 
   @override
   void initState() {
     super.initState();
-    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 3),
+    );
   }
 
   @override
@@ -85,9 +93,10 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = Theme
-        .of(context)
-        .scaffoldBackgroundColor;
+    final bgColor = Theme.of(context).scaffoldBackgroundColor;
+
+    final session = context.watch<SessionProvider>();
+    final glove = context.watch<GloveProvider>();
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -123,7 +132,7 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
                 Colors.blue,
                 Colors.pink,
                 Colors.orange,
-                Colors.purple
+                Colors.purple,
               ],
               createParticlePath: (size) => SessionProvider().drawStar(size),
             ),
@@ -133,8 +142,5 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
     );
   }
 }
-
-
-
 
 

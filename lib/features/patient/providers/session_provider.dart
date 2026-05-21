@@ -137,7 +137,6 @@ class SessionProvider with ChangeNotifier {
     // await _patientProvider.updateStatsAfterSession(finalSession.score);
 
     notifyListeners();
-    notifyListeners();
   }
 
   @override

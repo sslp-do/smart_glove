@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smart_glove/core/providers/theme_provider.dart';
+import 'package:smart_glove/core/providers/settings_providers.dart';
 import 'package:smart_glove/features/patient/providers/glove_provider.dart';
 import 'package:smart_glove/features/patient/settings/widgets/build_setting_card.dart';
 import 'package:smart_glove/features/patient/settings/widgets/build_setting_tile.dart';
@@ -13,14 +14,14 @@ class PatientSettings extends StatefulWidget {
 }
 
 class _PatientSettingsState extends State<PatientSettings> {
-  bool _notificationsEnabled = true;
-  bool _darkMode = false;
+  /*bool _notificationsEnabled = true;
+  bool _darkMode = false;*/
 
   @override
   Widget build(BuildContext context) {
     int battery  = context.watch<GloveProvider>().status.battery;
     bool connected = context.watch<GloveProvider>().status.isConnected;
-
+    final settings = context.watch<SettingsProvider>();
     final bgColor = Colors.grey[50];
     final cardColor = Colors.white;
     final primaryColor = Colors.teal;
@@ -48,11 +49,11 @@ class _PatientSettingsState extends State<PatientSettings> {
                     iconColor: Colors.blue,
                     title: "Connection Status",
                     subtitle:
-                        "Glove is ${!connected??"not"} currently connected to your device",
+                        "Glove is ${!settings.isGloveConnected??"not"} currently connected to your device",
                     trailing: TextButton(
                       onPressed: () {},
                       child: Text(
-                       !connected?"Connect": "Disconnect",
+                       !settings.isGloveConnected?"Connect": "Disconnect",
                         style: TextStyle(color:!connected? Colors.red: Colors.green),
                       ),
                     ),
@@ -107,9 +108,8 @@ class _PatientSettingsState extends State<PatientSettings> {
                     subtitle: const Text(
                       "Receive doctor's notes and session reminders",
                     ),
-                    value: _notificationsEnabled,
-                    onChanged: (val) =>
-                        setState(() => _notificationsEnabled = val),
+                    value: settings.notificationsEnabled,
+                    onChanged: (val) {context.read<SettingsProvider>().toggleNotifications();},
                   ),
                   const Divider(height: 1),
                   SwitchListTile(
@@ -124,10 +124,8 @@ class _PatientSettingsState extends State<PatientSettings> {
                     subtitle: const Text(
                       "Easier on the eyes in low light conditions",
                     ),
-                    value: context.watch<ThemeProvider>().isDarkMode,
-                    onChanged: context
-                        .watch<ThemeProvider>()
-                        .toggleTheme,
+                    value: context.watch<SettingsProvider>().isDarkMode,
+                    onChanged: (val)  {context.read<SettingsProvider>().toggleTheme();},
                   ),
                 ]),
                 const SizedBox(height: 40),

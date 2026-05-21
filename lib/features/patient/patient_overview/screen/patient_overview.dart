@@ -23,25 +23,58 @@ class PatientOverview extends StatefulWidget {
 
 
 class _PatientOverviewState extends State<PatientOverview> {
+
   @override
+  void initState() {
+    super.initState();
+    // جلب البيانات لما الشاشة تفتح — listen: false لأننا مش داخل build
+    Future.microtask(() {
+      final provider = Provider.of<PatientProvider>(context, listen: false);
+      provider.fetchPatientData("patient_123");
+      provider.fetchNextExercise("patient_123");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final patientProvider = Provider.of<PatientProvider>(context);
     final gloveProvider = Provider.of<GloveProvider>(context);
-    //final badges = Provider.of<BadgesProvider>(context).badges;
+    final badges = Provider.of<BadgesProvider>(context).Badges;
+
+    // ✅ لو البيانات لسا بتتحمل، اعرض Loading
+    if (patientProvider.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    // ✅ لو البيانات ما وصلت (null)، اعرض رسالة
+    if (patientProvider.currentPatient == null) {
+      return const Center(child: Text("No data available"));
+    }
+
+    // ✅ هون مضمون البيانات موجودة، استخدمها بأمان
+    final patient = patientProvider.currentPatient!;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           HeaderSection(gloveProvider:gloveProvider, patientProvider: patientProvider,),
+          HeaderSection(),
           const SizedBox(height: 30),
-           StartSessionCard(exercise:/* patientProvider?.nextExercise*/ new Exercise(id: "iooi",title: 'title',description: 'description',tutorialImageUrl: 'tutorialImageUrl',duration: 6,targetRepetitions: 5,targetData: FingerData(thumb: 34, index: 43, middle: 23, ring: 34, little: 67)),),
+
+          // ✅ من الـ Provider مباشرة
+          if (patientProvider.nextExercise != null)
+            StartSessionCard(exercise: patientProvider.nextExercise!),
+
           const SizedBox(height: 30),
-           StatsGrid(patientProvider: patientProvider,), const SizedBox(height: 30),
-          // BadgesSection(badges: badges,),
+          StatsGrid(),
           const SizedBox(height: 30),
-          ProgressChartSection(weeklyProgress: new Map(),), const SizedBox(height: 30),
+
+          BadgesSection(badges: badges),
+          const SizedBox(height: 30),
+
+          // ✅ من الـ Patient Model مباشرة
+          ProgressChartSection(weeklyProgress: patient.weeklyProgress),
+          const SizedBox(height: 30),
         ],
       ),
     );

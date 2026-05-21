@@ -74,11 +74,13 @@ class PatientProvider with ChangeNotifier {
 
   // 2. دالة لتحديث الـ Streak والسكور بعد انتهاء الجلسة
   // يتم استدعاؤها من الـ SessionProvider بعد نجاح الحفظ
-  void updateStatsAfterSession(int newScore) {
+  void updateStatsAfterSession(int score) {
     if (_currentPatient == null) return;
 
-    // منطق بسيط لتحديث البيانات محلياً قبل المزامنة
-    // (يمكنكِ زيادة عدد الجلسات وتحديث الـ Weekly Progress هنا)
+    _currentPatient = _currentPatient!.copyWith(
+      totalSessions: _currentPatient!.totalSessions + 1,
+      streak: _currentPatient!.streak + 1,
+    );
     notifyListeners();
   }
 

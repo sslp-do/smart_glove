@@ -11,7 +11,7 @@ class BadgesProvider extends ChangeNotifier{
     BadgeItem("Early Bird", "Complete a session before 8 AM", Icons.wb_sunny, false, Colors.amber),
     BadgeItem("Marathon", "Total 10 hours of training", Icons.timer, false, Colors.teal),
   ];
-  List<BadgeItem> get all_Badges => _badges;
+  List<BadgeItem> get Badges => _badges;
 
  void updateBadgeStatus(Patient patient){
     List<String> newList = List.from(patient.badges);
@@ -47,38 +47,21 @@ class BadgesProvider extends ChangeNotifier{
     notifyListeners();
     }
 
-  List<BadgeItem> updateAndGetBadges(Patient patient){
-    List<String> newList = List.from(patient.badges);
+  void updateBadges(Patient patient) {
+    final earnedBadges = patient.badges;
 
-    if( patient.improvement > 10 && !newList.contains("Grip Master") )
-    {
-      newList.add("Grip Master");
-    }
-    if( patient.streak > 7 && !newList.contains("On Fire!") )
-    {
-      newList.add("On Fire!");
-    }
-    if( patient.totalSessions > 10 && !newList.contains("Marathon") )
-    {
-      newList.add("Marathon");
-    }
-    if (patient.weeklyProgress["Mon"] == 100 && !newList.contains("Early Bird"))
-    {
-      newList.add("Early Bird");
-    }
-    if (patient.totalSessions == 1 && !newList.contains("First Step"))
-    {
-      newList.add("First Step");
+    final rules = {
+      "Grip Master": patient.improvement > 10,
+      "On Fire!": patient.streak > 7,
+      "Marathon": patient.totalSessions > 10,
+      "Early Bird": patient.weeklyProgress["Mon"] == 100,
+      "First Step": patient.totalSessions >= 1,
+    };
+
+    for (var badge in _badges) {
+      badge.isUnlocked = rules[badge.title] ?? false;
     }
 
-    for (BadgeItem badge in _badges) {
-      if (newList.contains(badge.title)) {
-        badge.isUnlocked = true;
-      } else {
-        badge.isUnlocked = false;
-      }
-    }
-    return all_Badges;
-    notifyListeners();
+    notifyListeners(); // ✅ هون صح
   }
   }

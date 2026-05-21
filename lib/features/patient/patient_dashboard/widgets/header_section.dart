@@ -5,16 +5,17 @@ import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 import 'battery_status.dart';
 
 class HeaderSection extends StatelessWidget {
-  final PatientProvider patientProvider;
-  final GloveProvider gloveProvider;
 
-   HeaderSection({super.key, required this.patientProvider, required this.gloveProvider});
+
+   HeaderSection({super.key});
 
   @override
   Widget build(BuildContext context) {
    /* final patientProvider = context.watch<PatientProvider>();
     context.read<PatientProvider>().fetchPatientData("patientId");
     final gloveProvider = context.watch<GloveProvider>();*/
+    final gloveProvider = Provider.of<GloveProvider>(context);
+    final patientProvider = Provider.of<PatientProvider>(context);
     final theme = Theme.of(context);
 
     return Row(

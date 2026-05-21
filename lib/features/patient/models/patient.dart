@@ -28,4 +28,24 @@ class Patient {
       weeklyProgress: Map<String, int>.from(json['weeklyProgress'] ?? {}),
     );
   }
+
+  Patient copyWith({
+    String? id,
+    String? name,
+    int? totalSessions,
+    int? streak,
+    double? improvement,
+    List<String>? badges,
+    Map<String, int>? weeklyProgress,
+  }) {
+    return Patient(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      totalSessions: totalSessions ?? this.totalSessions,
+      streak: streak ?? this.streak,
+      improvement: improvement ?? this.improvement,
+      badges: badges ?? this.badges,
+      weeklyProgress: weeklyProgress ?? this.weeklyProgress,
+    );
+  }
 }
