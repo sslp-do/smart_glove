@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/core/models/alert_model.dart';
+import 'package:smart_glove/core/models/alert.dart';
 
 
 class AlertsProvider extends ChangeNotifier {

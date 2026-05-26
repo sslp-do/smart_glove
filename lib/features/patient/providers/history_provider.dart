@@ -15,9 +15,6 @@ class HistoryProvider with ChangeNotifier {
 
     // استدعاء الـ Repository لجلب قائمة الجلسات
     // _sessions = await _sessionRepository.getAllSessions(patientId);
-
-    _isLoading = false;
-    notifyListeners();
   }
 
   // دالة لجلب تفاصيل جلسة معينة عند الضغط عليها (لفتح صفحة التقرير)

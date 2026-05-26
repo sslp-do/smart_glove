@@ -3,18 +3,26 @@ class Patient {
   final String name;
   final int totalSessions;
   final int streak;
-  final double improvement;
+  final double recoveryProgress;
   final List<String> badges;
-  final Map<String, int> weeklyProgress; // مثال: {"Mon": 80, "Tue": 85}
+  final Map<String, int> weeklyProgress;
+  final String affectedHand;
+  final String status;
+  final String lastSessionTime;
+  final String Condition;
 
   Patient({
     required this.id,
     required this.name,
     required this.totalSessions,
     required this.streak,
-    required this.improvement,
+    required this.recoveryProgress,
     required this.badges,
     required this.weeklyProgress,
+    required this.affectedHand,
+    required this.status,
+    required this.lastSessionTime,
+    required this.Condition,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) {
@@ -23,29 +31,41 @@ class Patient {
       name: json['name'],
       totalSessions: json['totalSessions'] ?? 0,
       streak: json['streak'] ?? 0,
-      improvement: (json['improvement'] ?? 0).toDouble(),
+      recoveryProgress: (json['improvement'] ?? 0).toDouble(),
       badges: List<String>.from(json['badges'] ?? []),
       weeklyProgress: Map<String, int>.from(json['weeklyProgress'] ?? {}),
+      affectedHand: json['affectedHand'] ?? '',
+      status: json['status'] ?? '',
+      lastSessionTime: json['lastSessionTime'] ?? '',
+      Condition: json['Condition'] ?? '',
     );
   }
 
   Patient copyWith({
-    String? id,
     String? name,
     int? totalSessions,
     int? streak,
     double? improvement,
     List<String>? badges,
     Map<String, int>? weeklyProgress,
+    String? affectedHand,
+    String? status,
+    String? lastSessionTime,
+    String? Condition,
+    int? recoveryProgress,
   }) {
     return Patient(
-      id: id ?? this.id,
+      id: id,
       name: name ?? this.name,
       totalSessions: totalSessions ?? this.totalSessions,
       streak: streak ?? this.streak,
-      improvement: improvement ?? this.improvement,
+      recoveryProgress: improvement ?? this.recoveryProgress,
       badges: badges ?? this.badges,
       weeklyProgress: weeklyProgress ?? this.weeklyProgress,
+      affectedHand: affectedHand ?? this.affectedHand,
+      status: status ?? this.status,
+      lastSessionTime: lastSessionTime ?? this.lastSessionTime,
+      Condition: Condition ?? this.Condition,
     );
   }
 }

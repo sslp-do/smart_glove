@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smart_glove/features/patient/models/exercise_model.dart';
+import 'package:smart_glove/features/patient/providers/exercise_provider.dart';
+import 'package:smart_glove/features/therapist/providers/category_provider.dart';
+
+class buildCategoryChip extends StatefulWidget {
+  final String label;
+
+  buildCategoryChip({super.key, required this.label});
+
+  @override
+  State<buildCategoryChip> createState() => _buildCategoryChipState();
+}
+
+class _buildCategoryChipState extends State<buildCategoryChip> {
+  @override
+  Widget build(BuildContext context) {
+    String selectedCategory = context.watch<ExerciseProvider>().selectedCategory;
+    bool isSelected = selectedCategory == widget.label;
+    final theme = Theme.of(context);
+    return ChoiceChip(
+      label: Text(
+        widget.label,
+        style: TextStyle(
+          color: isSelected ? Colors.white : theme.textTheme.bodyMedium?.color,
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+      selected: isSelected,
+      selectedColor: theme.primaryColor,
+      backgroundColor: theme.cardTheme.color,
+      side: BorderSide(
+        color: isSelected ? theme.primaryColor : Colors.grey.withOpacity(0.2),
+      ),
+      onSelected: (bool selected) => setState(
+        () {
+          context.read<ExerciseProvider>().setCategory(widget.label);
+        //  context.read<CategoryProvider>().updateFilteredExercises();
+        }
+      ),
+    );
+  }
+}

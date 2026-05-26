@@ -28,6 +28,8 @@ class SessionProvider with ChangeNotifier {
 
 
   StreamSubscription<FingerData>? _gloveSubscription;
+
+
   final GloveRepository _gloveRepo = GloveRepository();
 
   final AIService _aiService = AIService();
@@ -48,7 +50,7 @@ class SessionProvider with ChangeNotifier {
     _startTimer();
     // بدلاً من انتظار تحديث يدوي، نحن نشترك في البيانات اللحظية
     _gloveSubscription = _gloveRepo.getLiveGloveData("patientId").listen((newData) {
-      updateGloveData(newData); // هذه الدالة التي كتبناها سابقاً ستحسب النسبة وتحدث الـ UI
+      updateGloveData(newData);
     });
     notifyListeners();
   }
@@ -91,26 +93,23 @@ class SessionProvider with ChangeNotifier {
   // --- منطق تغيير الهينت بناءً على الإنجاز ---
   void _updateHint() {
     if (_completionPercentage < 0.3) {
-      _currentHint = "استمر، أنت في البداية!";
+      _currentHint = "Good Start, Continue!";
     } else if (_completionPercentage < 0.7) {
-      _currentHint = "عمل رائع، اقتربت من نصف الهدف!";
+      _currentHint = "Nice work, you are getting there!";
     } else if (_completionPercentage < 0.9) {
-      _currentHint = "قليل من الجهد الإضافي وستنهي الجلسة!";
+      _currentHint = "A little more and you are there...";
     } else {
-      _currentHint = "ممتاز! لقد حققت الهدف تقريباً.";
+      _currentHint = "Great...You did it !";
     }
   }
 
   // --- إنهاء الجلسة وحفظ البيانات (التقرير) ---
   Future<void> finishSession() async {
-    // إغلاق الاشتراك فوراً عند انتهاء الجلسة
     await _gloveSubscription?.cancel();
 
     _timer?.cancel();
     _isSessionActive = false;
 
-
-    // 2. بناء كائن الجلسة (PatientSession) للحفظ
     final finalSession = PatientSession(
       sessionId: DateTime.now().millisecondsSinceEpoch.toString(),
       exerciseId: currentExercise!.id,
@@ -125,10 +124,10 @@ class SessionProvider with ChangeNotifier {
 
 
     // 1. استدعاء الـ AI API (تمثيل للطلب)
-    String aiResponse = await _aiService.getSessionAnalysis(finalSession);
+   // String aiResponse = await _aiService.getSessionAnalysis(finalSession);
 
     // 4. تحديث الكائن بالتحليل الحقيقي
-    final finalSessionAnalyzed = finalSession.copyWith(aiAnalysis: aiResponse);
+   // final finalSessionAnalyzed = finalSession.copyWith(aiAnalysis: aiResponse);
 
     // 5. حفظ الجلسة النهائية في Firestore (التقارير الهيستوري)
     // await _firestoreRepo.saveReport(finalSession);

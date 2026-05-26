@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_glove/core/models/assets.dart';
-import 'package:smart_glove/features/patient/patient_dashboard/screens/patient_dashboard.dart';
-import 'package:smart_glove/features/therapist/therapist_dashboard/screen/therapist_dashboard.dart';
+import 'package:smart_glove/features/patient/screens/patient_dashboard/screens/patient_dashboard.dart';
+import 'package:smart_glove/features/therapist/screens/therapist_dashboard/screen/therapist_dashboard.dart';
 
 import 'package:smart_glove/ui/signup/screen/signup.dart';
 

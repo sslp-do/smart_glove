@@ -21,13 +21,12 @@ class PatientProvider with ChangeNotifier {
     notifyListeners();
     try {
       // _currentPatient = await _patientRepository.getPatientProfile(patientId);
-
       _currentPatient = Patient(
         id: patientId,
         name: "Dounia Almassri",
         totalSessions: 45,
         streak: 5,
-        improvement: 12.5,
+        recoveryProgress: 12.5,
         badges: [],
         weeklyProgress: {
           "Sat": 70,
@@ -38,6 +37,10 @@ class PatientProvider with ChangeNotifier {
           "Thu": 0,
           "Fri": 0,
         },
+        affectedHand: "left",
+        Condition: "wrist",
+        status: "plateau",
+        lastSessionTime: "21-2",
       );
     } catch (e) {
       print("Error fetching patient data: $e");
@@ -53,7 +56,7 @@ class PatientProvider with ChangeNotifier {
 
       _nextExercise = Exercise(
         id: "1002",
-        title: "Full Grip",
+        name: "Full Grip",
         description: "Hand grip exercise",
         tutorialImageUrl: "",
         targetRepetitions: 0,
@@ -65,6 +68,8 @@ class PatientProvider with ChangeNotifier {
           ring: 0,
           little: 0,
         ),
+        difficulty: "Easy",
+        category: "Full Hand",
       );
       notifyListeners();
     } catch (e) {
