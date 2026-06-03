@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:smart_glove/features/patient/models/exercise_model.dart';
 import 'package:smart_glove/features/patient/models/fingerdata.dart';
+import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 
 class ExerciseProvider with ChangeNotifier {
   List<Exercise> _exercises = [];
@@ -129,6 +130,19 @@ class ExerciseProvider with ChangeNotifier {
     return _allExercises
         .where((exercise) => exercise.category == _selectedCategory)
         .toList();
+  }
+
+  Exercise? getExerciseByName(String name) {
+    try {
+      // 🎯 تبحث عن أول تمرين يتطابق اسمه تماماً (مع إهمال الفراغات الزائدة في البداية والنهاية)
+      return _allExercises.firstWhere(
+            (exercise) => exercise.name.trim().toLowerCase() == name.trim().toLowerCase(),
+      );
+    } catch (e) {
+      // 🟢 في حال لم يتم العثور على اسم التمرين، تعيد null بدلاً من كراش التطبيق
+      print("⚠️ لم يتم العثور على أي تمرين يحمل الاسم: $name");
+      return null;
+    }
   }
 
   // دالة لتغيير الفلتر عند ضغط المعالج على الأزرار العلوية

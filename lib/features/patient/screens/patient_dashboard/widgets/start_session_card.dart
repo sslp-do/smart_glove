@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_glove/features/patient/models/exercise_model.dart';
+
 // ignore: unused_import
 import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 import 'package:smart_glove/features/patient/providers/session_provider.dart';
@@ -70,13 +71,13 @@ class StartSessionCard extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton.icon(
                   onPressed: () {
+
+                    context.read<SessionProvider>().startSession(exercise);
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChangeNotifierProvider(
-                          create: (context) => SessionProvider(),
-                          child: LiveSessionScreen(currentExercise: exercise,),
-                        ),
+                        builder: (context) => LiveSessionScreen(currentExercise: exercise),
                       ),
                     );
                   },

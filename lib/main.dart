@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smart_glove/Test/debug_page.dart';
 import 'package:smart_glove/Test/stream_provider.dart';
 import 'package:smart_glove/core/providers/alerts_provider.dart';
 import 'package:smart_glove/features/patient/providers/badges_provider.dart';
@@ -11,8 +12,7 @@ import 'package:smart_glove/features/patient/providers/glove_provider.dart';
 import 'package:smart_glove/features/patient/providers/history_provider.dart';
 import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 import 'package:smart_glove/features/patient/providers/session_provider.dart';
-import 'package:smart_glove/features/patient/screens/live_session/added/hand_visual.dart';
-import 'package:smart_glove/features/patient/screens/live_session/added/patient_sessions_page.dart';
+import 'package:smart_glove/features/patient/screens/live_session/widgets/hand_visual.dart';
 import 'package:smart_glove/features/patient/screens/live_session/screen/result_screen.dart';
 import 'package:smart_glove/features/patient/screens/my_reports/screen/my_reports.dart';
 import 'package:smart_glove/features/patient/screens/patient_dashboard/screens/patient_dashboard.dart';
@@ -25,7 +25,7 @@ import 'package:smart_glove/ui/signup/screen/signup.dart';
 import 'package:smart_glove/ui/splash_screen/screen/splash_screen.dart';
 import 'package:window_manager/window_manager.dart';
 import 'core/providers/navigation_provider.dart';
-import 'core/theme/app_colors.dart';
+import 'core/models/app_colors.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -90,8 +90,8 @@ class Application extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/signup': (context) => PatientSignUpScreen(),
       },
-     home: TherapistDashboard(),
-   /*   PatientSessionsPage()*/
+     home: /*TestPage(),*/ PatientDashboard()
+
     );
   }
 }

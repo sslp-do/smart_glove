@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_glove/core/theme/app_colors.dart';
+import 'package:smart_glove/core/models/app_colors.dart';
 
 
 class GloveBatteryStatus extends StatelessWidget {

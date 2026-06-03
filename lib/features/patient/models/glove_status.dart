@@ -16,4 +16,11 @@ class GloveStatus {
       isCharging: json['isCharging'] ?? false,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+    'battery': battery,
+    'isConnected': isConnected,
+    'isCharging': isCharging,
+  };
+
 }

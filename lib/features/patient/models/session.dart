@@ -1,4 +1,5 @@
 import 'package:smart_glove/features/patient/models/fingerdata.dart' show FingerData;
+import 'package:smart_glove/features/patient/screens/result_page/widgets/finger_snapshot.dart';
 
 class PatientSession {
   final String sessionId;
@@ -8,7 +9,7 @@ class PatientSession {
   final Duration duration;
   final double progress;
   final int score;
-  final FingerData gloveDataSummary; // متوسط القراءات في الجلسة
+  final FingerSnapshot gloveDataSummary; // متوسط القراءات في الجلسة
   final String aiAnalysis; // النص القادم من الـ API
 
   PatientSession({
@@ -22,6 +23,22 @@ class PatientSession {
     required this.gloveDataSummary,
     required this.aiAnalysis,
   });
+
+  factory PatientSession.fromJson(Map<String, dynamic> json) {
+    return PatientSession(
+      sessionId: json['sessionId'] ?? '',
+      exerciseId: json['exerciseId'] ?? '',
+      patientNumber: json['patientNumber'] ?? '',
+      sessionDate: json['sessionDate'] != null
+          ? DateTime.parse(json['sessionDate'])
+          : DateTime.now(),
+      duration: Duration(seconds: json['durationSeconds'] ?? 0),
+      progress: (json['progress'] ?? 0).toDouble(),
+      score: json['score'] ?? 0,
+      gloveDataSummary: FingerSnapshot.fromJson(json['gloveDataSummary'] ?? {}),
+      aiAnalysis: json['aiAnalysis'] ?? '',
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     'sessionId': sessionId,
@@ -43,7 +60,7 @@ class PatientSession {
     Duration? duration,
     double? progress,
     int? score,
-    FingerData? gloveDataSummary,
+    FingerSnapshot? gloveDataSummary,
     String? aiAnalysis,
   }) {
     return PatientSession(

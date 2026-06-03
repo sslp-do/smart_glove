@@ -38,7 +38,7 @@ class PatientDataProvider extends ChangeNotifier {
           affectedHand: "Left Hand",
           status: "Improving", // ممررة لجدول الـ Triage
           lastSessionTime: "2 hours ago",
-          Condition: "Post-Stroke (Left Hand)", // ممررة لجدول All Patients
+          diagnosis: "Post-Stroke (Left Hand)", // ممررة لجدول All Patients
         ),
         Patient(
           id: "#PT-1043",
@@ -51,7 +51,7 @@ class PatientDataProvider extends ChangeNotifier {
           affectedHand: "Right Hand",
           status: "Critical",
           lastSessionTime: "3 days ago",
-          Condition: "Carpal Tunnel Syndrome",
+          diagnosis: "Carpal Tunnel Syndrome",
         ),
         Patient(
           id: "#PT-1044",
@@ -64,7 +64,7 @@ class PatientDataProvider extends ChangeNotifier {
           affectedHand: "Right Hand",
           status: "Improving", // أو Completed حسب رغبتكِ
           lastSessionTime: "Yesterday",
-          Condition: "Fracture Recovery (Right)",
+          diagnosis: "Fracture Recovery (Right)",
         ),
         Patient(
           id: "#PT-1045",
@@ -77,7 +77,7 @@ class PatientDataProvider extends ChangeNotifier {
           affectedHand: "Left Hand",
           status: "Plateau",
           lastSessionTime: "1 week ago",
-          Condition: "Tendon Repair",
+          diagnosis: "Tendon Repair",
         ),
         Patient(
           id: "#PT-1046",
@@ -90,7 +90,7 @@ class PatientDataProvider extends ChangeNotifier {
           affectedHand: "Right Hand",
           status: "Improving",
           lastSessionTime: "Just now",
-          Condition: "Arthritis Management",
+          diagnosis: "Arthritis Management",
         ),
       ];
       notifyListeners();

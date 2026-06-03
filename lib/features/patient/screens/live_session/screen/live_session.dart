@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,6 +81,7 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
     _confettiController = ConfettiController(
       duration: const Duration(seconds: 3),
     );
+    //context.read<SessionProvider>().startSession(new Exercise(id: "id", name: "name", description: "description", tutorialImageUrl: "tutorialImageUrl", targetData: FingerData(thumb: 55, index: 8, middle: 23, ring: 23, little: 12), targetRepetitions: 6, duration: 45, difficulty: "low", category: "category"));;
   }
 
   @override
@@ -91,7 +93,7 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
   @override
   Widget build(BuildContext context) {
     final bgColor = Theme.of(context).scaffoldBackgroundColor;
-
+    final sessionProvider = context.watch<SessionProvider>();
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -103,12 +105,7 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
         actions: [
           Spacer(),
           buildSensorState(context.watch<GloveProvider>().status.isConnected),
-          /*ElevatedButton(
-            child: Text("Simulate Data"),
-            onPressed: () {
-              simulateGloveData();
-            },
-          )*/
+
         ],
       ),
       body: Stack(
@@ -118,7 +115,7 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
               // left side : simulation (60%)
               simulationSection(),
               // right side : control (40%)
-              controlSection(),
+              controlSection(sessionProvider: sessionProvider,),
             ],
           ),
 
@@ -135,13 +132,39 @@ class _LiveSessionScreenState extends State<LiveSessionScreen> {
                 Colors.orange,
                 Colors.purple,
               ],
-              createParticlePath: (size) => SessionProvider().drawStar(size),
+              createParticlePath: (size) => _drawStar(size),
             ),
           ),
         ],
       ),
     );
   }
+}
+
+Path _drawStar(Size size) {
+  double degToRad(double deg) => deg * (pi / 180.0);
+  const numberOfPoints = 5;
+  final halfWidth = size.width / 2;
+  final externalRadius = halfWidth;
+  final internalRadius = halfWidth / 2.5;
+  final degreesPerStep = degToRad(360 / numberOfPoints);
+  final halfDegreesPerStep = degreesPerStep / 2;
+  final path = Path();
+  final fullAngle = degToRad(360);
+  path.moveTo(size.width, halfWidth);
+
+  for (double step = 0; step < fullAngle; step += degreesPerStep) {
+    path.lineTo(
+      halfWidth + externalRadius * cos(step),
+      halfWidth + externalRadius * sin(step),
+    );
+    path.lineTo(
+      halfWidth + internalRadius * cos(step + halfDegreesPerStep),
+      halfWidth + internalRadius * sin(step + halfDegreesPerStep),
+    );
+  }
+  path.close();
+  return path;
 }
 
 

@@ -15,6 +15,10 @@ class TherapistMainContent extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
       child: _buildBody(routName),
     );
   }

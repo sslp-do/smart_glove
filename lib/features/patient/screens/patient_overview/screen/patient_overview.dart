@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_glove/features/patient/providers/badges_provider.dart';
+import 'package:smart_glove/features/patient/providers/exercise_provider.dart';
 import 'package:smart_glove/features/patient/providers/glove_provider.dart';
 import 'package:smart_glove/features/patient/providers/patient_provider.dart';
 import 'package:smart_glove/features/patient/screens/patient_dashboard/widgets/badge_section.dart';
@@ -51,27 +52,26 @@ class _PatientOverviewState extends State<PatientOverview> {
     // ✅ هون مضمون البيانات موجودة، استخدمها بأمان
     final patient = patientProvider.currentPatient!;
 
+    final nextExercise = context.read<ExerciseProvider>().getExerciseByName("Full Fist Grip");
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HeaderSection(),
-          const SizedBox(height: 30),
 
-          // ✅ من الـ Provider مباشرة
-          if (patientProvider.nextExercise != null)
-            StartSessionCard(exercise: patientProvider.nextExercise!),
+          const SizedBox(height: 30),
+          StartSessionCard(exercise: nextExercise!),
 
           const SizedBox(height: 30),
           StatsGrid(),
-          const SizedBox(height: 30),
 
+          const SizedBox(height: 30),
           BadgesSection(badges: badges),
-          const SizedBox(height: 30),
 
-          // ✅ من الـ Patient Model مباشرة
-          ProgressChartSection(weeklyProgress: patient.weeklyProgress),
           const SizedBox(height: 30),
+          ProgressChartSection(weeklyProgress: patient.weeklyProgress),
+        //  const SizedBox(height: 30),
         ],
       ),
     );

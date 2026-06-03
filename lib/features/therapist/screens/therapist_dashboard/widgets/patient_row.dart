@@ -53,7 +53,7 @@ Widget buildPatientRow(Patient patient, ThemeData theme , BuildContext context) 
           Expanded(
             flex: 2,
             child: Text(
-              patient.Condition,
+              patient.diagnosis,
               style: TextStyle(color: theme.textTheme.bodyMedium?.color),
             ),
           ),

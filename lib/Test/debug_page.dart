@@ -3,16 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:smart_glove/Test/stream_provider.dart';
+import 'package:smart_glove/features/patient/providers/session_provider.dart';
 
-
-class GloveMonitorPage extends StatelessWidget {
+class TestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final monitorProvider = context.read<TestMonitorProvider>();
 
     return Scaffold(
       appBar: AppBar(title: const Text("Glove Data Testing")),
-      body: StreamBuilder<DocumentSnapshot>(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+         //   context.read<SessionProvider>().testAiPayloadUpload();
+          },
+          child: Text("data"),
+        ),
+      ),
+
+      /*StreamBuilder<DocumentSnapshot>(
         stream: monitorProvider.gloveDataStream,
         builder: (context, snapshot) {
           if (snapshot.hasError)
@@ -61,7 +70,7 @@ class GloveMonitorPage extends StatelessWidget {
             ],
           );
         },
-      ),
+      ),*/
     );
   }
 }

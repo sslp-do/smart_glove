@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_glove/features/patient/models/fingerdata.dart';
 import 'package:smart_glove/features/patient/models/session.dart';
+import 'package:smart_glove/features/patient/screens/result_page/widgets/finger_snapshot.dart';
 
 class ReportsProvider with ChangeNotifier {
   List<PatientSession> _reports = [];
@@ -36,8 +37,8 @@ class ReportsProvider with ChangeNotifier {
           duration: Duration(minutes: 15),
           progress: 0.85,
           score: 85,
-          gloveDataSummary: FingerData(
-            thumb: 80, index: 85, middle: 90, ring: 75, little: 70,
+          gloveDataSummary: FingerSnapshot(
+            thumb: 80, index: 85, middle: 90, ring: 75, pinky: 70,
           ),
           aiAnalysis: "+12% Strength improvement detected.",
         ),
@@ -49,8 +50,8 @@ class ReportsProvider with ChangeNotifier {
           duration: Duration(minutes: 10),
           progress: 0.60,
           score: 60,
-          gloveDataSummary: FingerData(
-            thumb: 60, index: 65, middle: 55, ring: 50, little: 45,
+          gloveDataSummary: FingerSnapshot(
+            thumb: 60, index: 65, middle: 55, ring: 50, pinky: 45,
           ),
           aiAnalysis: "-10% Mobility regression detected.",
         ),  PatientSession(
@@ -61,8 +62,8 @@ class ReportsProvider with ChangeNotifier {
           duration: Duration(minutes: 10),
           progress: 0.60,
           score: 60,
-          gloveDataSummary: FingerData(
-            thumb: 60, index: 65, middle: 55, ring: 50, little: 45,
+          gloveDataSummary: FingerSnapshot(
+            thumb: 60, index: 65, middle: 55, ring: 50, pinky: 45,
           ),
           aiAnalysis: "-10% Mobility regression detected.",
         ),  PatientSession(
@@ -73,8 +74,8 @@ class ReportsProvider with ChangeNotifier {
           duration: Duration(minutes: 10),
           progress: 0.60,
           score: 60,
-          gloveDataSummary: FingerData(
-            thumb: 60, index: 65, middle: 55, ring: 50, little: 45,
+          gloveDataSummary: FingerSnapshot(
+            thumb: 60, index: 65, middle: 55, ring: 50, pinky: 45,
           ),
           aiAnalysis: "-10% Mobility regression detected.",
         ),  PatientSession(
@@ -85,8 +86,8 @@ class ReportsProvider with ChangeNotifier {
           duration: Duration(minutes: 10),
           progress: 0.60,
           score: 60,
-          gloveDataSummary: FingerData(
-            thumb: 60, index: 65, middle: 55, ring: 50, little: 45,
+          gloveDataSummary: FingerSnapshot(
+            thumb: 60, index: 65, middle: 55, ring: 50, pinky: 45,
           ),
           aiAnalysis: "-10% Mobility regression detected.",
         ),

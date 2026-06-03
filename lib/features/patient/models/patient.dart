@@ -9,7 +9,7 @@ class Patient {
   final String affectedHand;
   final String status;
   final String lastSessionTime;
-  final String Condition;
+  final String diagnosis;
 
   Patient({
     required this.id,
@@ -22,7 +22,7 @@ class Patient {
     required this.affectedHand,
     required this.status,
     required this.lastSessionTime,
-    required this.Condition,
+    required this.diagnosis,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) {
@@ -37,7 +37,7 @@ class Patient {
       affectedHand: json['affectedHand'] ?? '',
       status: json['status'] ?? '',
       lastSessionTime: json['lastSessionTime'] ?? '',
-      Condition: json['Condition'] ?? '',
+      diagnosis: json['Condition'] ?? '',
     );
   }
 
@@ -65,7 +65,7 @@ class Patient {
       affectedHand: affectedHand ?? this.affectedHand,
       status: status ?? this.status,
       lastSessionTime: lastSessionTime ?? this.lastSessionTime,
-      Condition: Condition ?? this.Condition,
+      diagnosis: Condition ?? this.diagnosis,
     );
   }
 }
